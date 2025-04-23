@@ -1,38 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* General Reset & Base Styles */
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa; /* Light background */
+  color: #343a40; /* Dark grey text */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1; /* Make main content area fill available space */
+  padding: 2rem 1rem;
+}
+
+/* Header Styles */
+header {
+  background-color: #003366; /* Dark Blue */
   color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.App-link {
-  color: #61dafb;
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700; /* Ensure header uses bold weight */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header nav {
+  /* Basic nav styling - will add links later */
 }
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem; /* Spacing between links */
+}
+
+header nav ul li {
+  display: inline;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #e9ecef; /* Lighter color on hover */
+}
+
+/* Hero Section Styles */
+.hero {
+  padding: 4rem 1rem;
+  background-color: #e9ecef; /* Light grey */
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 1rem;
+  font-weight: 700; /* Ensure bold */
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #495057;
+  margin-bottom: 1.5rem;
+}
+
+.hero button {
+  background-color: #0056b3; /* Medium Blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+  background-color: #003366; /* Darker Blue on hover */
+}
+
+/* Features Section Styles */
+.features {
+  padding: 3rem 1rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features h2 {
+  font-size: 2.2rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700; /* Ensure bold */
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 2rem;
+  text-align: left;
+}
+
+.feature-item {
+  background-color: #ffffff; /* White background for items */
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.feature-item h3 {
+  font-size: 1.3rem;
+  color: #0056b3; /* Medium Blue */
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 700; /* Bolder subheadings */
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #495057;
+  line-height: 1.6;
+}
+
+/* How It Works Section Styles */
+.how-it-works {
+  padding: 3rem 1rem;
+  background-color: #e9ecef; /* Light grey background like Hero */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  border-radius: 8px;
+}
+
+.how-it-works h2 {
+  font-size: 2.2rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700; /* Ensure bold */
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.step-item {
+  flex: 1;
+  min-width: 220px; /* Minimum width before wrapping */
+  max-width: 300px; /* Max width per item */
+  text-align: center;
+  padding: 1rem;
+}
+
+.step-number {
+  display: inline-block;
+  background-color: #0056b3; /* Medium Blue */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.step-item h3 {
+  font-size: 1.3rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 0.75rem;
+  font-weight: 700; /* Bolder subheadings */
+}
+
+.step-item p {
+  font-size: 1rem;
+  color: #495057;
+  line-height: 1.6;
+}
+
+/* Contact Section Styles */
+.contact {
+  padding: 3rem 1rem;
+  max-width: 700px; /* Narrower width for form */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.contact h2 {
+  font-size: 2.2rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 700; /* Ensure bold */
+}
+
+.contact p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #495057;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #343a40;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem;
+  border: 1px solid #ced4da; /* Light grey border */
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0056b3; /* Medium Blue on focus */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+}
+
+.contact button[type="submit"] {
+  background-color: #0056b3; /* Medium Blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center; /* Center button */
+  margin-top: 1rem;
+}
+
+.contact button[type="submit"]:hover {
+  background-color: #003366; /* Darker Blue on hover */
+}
+
+/* Footer Styles */
+footer {
+  background-color: #343a40; /* Dark Grey */
+  color: #adb5bd; /* Lighter grey text */
+  padding: 1.5rem 1rem;
+  margin-top: auto; /* Push footer to the bottom */
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Pricing Section Styles */
+.pricing {
+  padding: 3rem 1rem;
+  background-color: #f8f9fa; /* Light background */
+}
+
+.pricing h2 {
+  font-size: 2.2rem;
+  color: #003366; /* Dark Blue */
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700; /* Ensure bold */
+}
+
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: stretch; /* Make cards same height */
+}
+
+.pricing-plan {
+  background-color: #ffffff; /* White card */
+  border: 1px solid #dee2e6; /* Light border */
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Highlighted plan */
+.pricing-plan.featured {
+  border-color: #0056b3; /* Medium Blue border */
+  border-width: 2px;
+  transform: scale(1.03); /* Slightly larger */
+  z-index: 1;
+}
+
+.pricing-plan.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.pricing-plan h3 {
+  font-size: 1.6rem;
+  color: #003366; /* Dark Blue */
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700; /* Bolder plan titles */
+}
+
+.price-tag {
+  margin-bottom: 1.5rem;
+}
+
+.price-tag .price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0056b3; /* Medium Blue */
+}
+
+.price-tag .frequency {
+  font-size: 1rem;
+  color: #6c757d; /* Grey text */
+  display: block; /* Or inline-block */
+  margin-top: 0.25rem;
+}
+
+.pricing-plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  text-align: left;
+  flex-grow: 1; /* Allows ul to grow and push button down */
+}
+
+.pricing-plan ul li {
+  margin-bottom: 0.75rem;
+  color: #495057;
+  position: relative;
+  padding-left: 1.5rem; /* Space for checkmark */
+}
+
+/* Simple checkmark using pseudo-element */
+.pricing-plan ul li::before {
+  content: '✓'; /* Checkmark symbol */
+  color: #28a745; /* Green color */
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.discount-info {
+  font-size: 0.9rem;
+  color: #17a2b8; /* Info Blue/Cyan */
+  font-weight: 500;
+  margin-top: auto; /* Push discount info towards button */
+  margin-bottom: 1rem;
+}
+
+.pricing-plan button {
+  background-color: #0056b3; /* Medium Blue */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Push button to bottom */
+  width: 80%;
+  align-self: center;
+}
+
+.pricing-plan.featured button {
+    background-color: #004085; /* Darker blue for featured plan */
+}
+
+.pricing-plan button:hover {
+  background-color: #003366; /* Darker Blue on hover */
+}
+
+/* Remove default CRA styles if present */
+/* .App-logo { ... } */
+/* .App-header { ... } */
+/* .App-link { ... } */
