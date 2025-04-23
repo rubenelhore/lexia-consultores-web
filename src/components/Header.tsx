@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logo.png'; // Import the logo assuming it's in src/
+import logo from '../Logo.png'; // Corrected case for logo import
 
 const Header: React.FC = () => {
   return (
