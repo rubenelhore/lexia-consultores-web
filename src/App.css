@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
 /* General Reset & Base Styles */
 body {
@@ -8,13 +9,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f9fa; /* Light background */
+  background-color: #ffffff; /* Change to white or keep very light grey */
   color: #343a40; /* Dark grey text */
+  line-height: 1.6; /* Add base line-height */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Headings Font */
+h1, h2, h3 {
+  font-family: 'Merriweather', serif; /* Apply Merriweather to headings */
+  color: #003366; /* Default heading color - Dark Blue */
+  font-weight: 700;
 }
 
 .App {
@@ -32,18 +41,17 @@ main {
 /* Header Styles */
 header {
   background-color: #003366; /* Dark Blue */
-  color: white;
-  padding: 1rem 2rem;
+  color: #EAEAEA; /* Light grey text */
+  padding: 0.5rem 2rem; /* Adjust padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700; /* Ensure header uses bold weight */
+.header-logo {
+  height: 50px; /* Adjust height as needed */
+  width: auto;
 }
 
 header nav {
@@ -63,7 +71,7 @@ header nav ul li {
 }
 
 header nav ul li a {
-  color: white;
+  color: #EAEAEA; /* Light grey link text */
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -71,13 +79,13 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-  color: #e9ecef; /* Lighter color on hover */
+  color: #ffffff; /* White on hover */
 }
 
 /* Hero Section Styles */
 .hero {
   padding: 4rem 1rem;
-  background-color: #e9ecef; /* Light grey */
+  background-color: #f8f9fa; /* Light grey background */
   border-radius: 8px;
   margin-bottom: 2rem;
   max-width: 900px;
@@ -87,19 +95,18 @@ header nav ul li a:hover {
 
 .hero h2 {
   font-size: 2.5rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 1rem;
-  font-weight: 700; /* Ensure bold */
 }
 
 .hero p {
   font-size: 1.2rem;
   color: #495057;
   margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif; /* Ensure body font */
 }
 
 .hero button {
-  background-color: #0056b3; /* Medium Blue */
+  background-color: #6C7A89; /* Muted Blue Accent */
   color: white;
   padding: 12px 24px;
   border: none;
@@ -107,10 +114,11 @@ header nav ul li a:hover {
   font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif; /* Ensure body font */
 }
 
 .hero button:hover {
-  background-color: #003366; /* Darker Blue on hover */
+  background-color: #57646f; /* Darker Muted Blue on hover */
 }
 
 /* Features Section Styles */
@@ -123,10 +131,8 @@ header nav ul li a:hover {
 
 .features h2 {
   font-size: 2.2rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 2.5rem;
   text-align: center;
-  font-weight: 700; /* Ensure bold */
 }
 
 .features-grid {
@@ -151,10 +157,9 @@ header nav ul li a:hover {
 
 .feature-item h3 {
   font-size: 1.3rem;
-  color: #0056b3; /* Medium Blue */
+  color: #003366; /* Keep Dark Blue or use Muted Blue #6C7A89 ? Let's keep Dark Blue for now */
   margin-top: 0;
   margin-bottom: 0.75rem;
-  font-weight: 700; /* Bolder subheadings */
 }
 
 .feature-item p {
@@ -166,7 +171,7 @@ header nav ul li a:hover {
 /* How It Works Section Styles */
 .how-it-works {
   padding: 3rem 1rem;
-  background-color: #e9ecef; /* Light grey background like Hero */
+  background-color: #f8f9fa; /* Light grey background */
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
@@ -176,10 +181,8 @@ header nav ul li a:hover {
 
 .how-it-works h2 {
   font-size: 2.2rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 2.5rem;
   text-align: center;
-  font-weight: 700; /* Ensure bold */
 }
 
 .steps-container {
@@ -199,7 +202,7 @@ header nav ul li a:hover {
 
 .step-number {
   display: inline-block;
-  background-color: #0056b3; /* Medium Blue */
+  background-color: #6C7A89; /* Muted Blue Accent */
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -208,13 +211,12 @@ header nav ul li a:hover {
   line-height: 50px;
   border-radius: 50%;
   margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif; /* Ensure non-serif font */
 }
 
 .step-item h3 {
   font-size: 1.3rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 0.75rem;
-  font-weight: 700; /* Bolder subheadings */
 }
 
 .step-item p {
@@ -230,17 +232,15 @@ header nav ul li a:hover {
   margin-left: auto;
   margin-right: auto;
   margin-top: 2rem;
-  background-color: #ffffff; /* White background */
+  background-color: #f8f9fa; /* Light Grey Background */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .contact h2 {
   font-size: 2.2rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 1rem;
   text-align: center;
-  font-weight: 700; /* Ensure bold */
 }
 
 .contact p {
@@ -285,7 +285,7 @@ header nav ul li a:hover {
 }
 
 .contact button[type="submit"] {
-  background-color: #0056b3; /* Medium Blue */
+  background-color: #6C7A89; /* Muted Blue Accent */
   color: white;
   padding: 12px 24px;
   border: none;
@@ -295,16 +295,17 @@ header nav ul li a:hover {
   transition: background-color 0.3s ease;
   align-self: center; /* Center button */
   margin-top: 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .contact button[type="submit"]:hover {
-  background-color: #003366; /* Darker Blue on hover */
+  background-color: #57646f; /* Darker Muted Blue on hover */
 }
 
 /* Footer Styles */
 footer {
-  background-color: #343a40; /* Dark Grey */
-  color: #adb5bd; /* Lighter grey text */
+  background-color: #003366; /* Dark Blue */
+  color: #bdc3c7; /* Lighter grey/silver text */
   padding: 1.5rem 1rem;
   margin-top: auto; /* Push footer to the bottom */
   font-size: 0.9rem;
@@ -317,15 +318,13 @@ footer p {
 /* Pricing Section Styles */
 .pricing {
   padding: 3rem 1rem;
-  background-color: #f8f9fa; /* Light background */
+  background-color: #ffffff; /* White background */
 }
 
 .pricing h2 {
   font-size: 2.2rem;
-  color: #003366; /* Dark Blue */
   margin-bottom: 2.5rem;
   text-align: center;
-  font-weight: 700; /* Ensure bold */
 }
 
 .pricing-container {
@@ -356,7 +355,7 @@ footer p {
 
 /* Highlighted plan */
 .pricing-plan.featured {
-  border-color: #0056b3; /* Medium Blue border */
+  border-color: #6C7A89; /* Muted Blue Accent for featured border */
   border-width: 2px;
   transform: scale(1.03); /* Slightly larger */
   z-index: 1;
@@ -368,10 +367,8 @@ footer p {
 
 .pricing-plan h3 {
   font-size: 1.6rem;
-  color: #003366; /* Dark Blue */
   margin-top: 0;
   margin-bottom: 1rem;
-  font-weight: 700; /* Bolder plan titles */
 }
 
 .price-tag {
@@ -381,7 +378,8 @@ footer p {
 .price-tag .price {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #0056b3; /* Medium Blue */
+  color: #6C7A89; /* Muted Blue Accent */
+  font-family: 'Montserrat', sans-serif; /* Price looks better sans-serif */
 }
 
 .price-tag .frequency {
@@ -418,14 +416,14 @@ footer p {
 
 .discount-info {
   font-size: 0.9rem;
-  color: #17a2b8; /* Info Blue/Cyan */
+  color: #5a86a4; /* Slightly different blue for info */
   font-weight: 500;
   margin-top: auto; /* Push discount info towards button */
   margin-bottom: 1rem;
 }
 
 .pricing-plan button {
-  background-color: #0056b3; /* Medium Blue */
+  background-color: #6C7A89; /* Muted Blue Accent */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -437,14 +435,15 @@ footer p {
   margin-top: auto; /* Push button to bottom */
   width: 80%;
   align-self: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .pricing-plan.featured button {
-    background-color: #004085; /* Darker blue for featured plan */
+    background-color: #57646f; /* Darker Muted Blue for featured plan button */
 }
 
 .pricing-plan button:hover {
-  background-color: #003366; /* Darker Blue on hover */
+  background-color: #57646f; /* Darker Muted Blue on hover */
 }
 
 /* Remove default CRA styles if present */

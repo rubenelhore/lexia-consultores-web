@@ -1,10 +1,10 @@
 import React from 'react';
+import logo from '../logo.png'; // Import the logo assuming it's in src/
 
 const Header: React.FC = () => {
   return (
     <header>
-      {/* Header content will go here */}
-      <h1>LexIA Consultores</h1> {/* Or your chosen name */}
+      <img src={logo} alt="LexIA Consultores Logo" className="header-logo" />
       <nav>
         <ul>
           <li><a href="#features">Características</a></li>
