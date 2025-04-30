@@ -4,14 +4,15 @@
 /* General Reset & Base Styles */
 body {
   margin: 0;
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: var(--font-primary), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff; /* Change to white or keep very light grey */
-  color: #343a40; /* Dark grey text */
-  line-height: 1.6; /* Add base line-height */
+  background-color: var(--color-background-white);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  font-size: 16px; /* Base font size */
 }
 
 code {
@@ -21,9 +22,33 @@ code {
 
 /* Headings Font */
 h1, h2, h3 {
-  font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
-  color: #003366; /* Default heading color - Dark Blue */
+  font-family: var(--font-primary);
+  color: var(--color-primary);
   font-weight: 700;
+  line-height: 1.3; /* Consistent line height for headings */
+  margin-top: 0; /* Remove default top margin */
+}
+
+h1 {
+  font-size: 3rem; /* Example size, adjust as needed */
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: 2.2rem; /* Was 2.2rem in most places */
+  margin-bottom: var(--spacing-lg); /* Consistent margin below h2 */
+}
+
+h3 {
+  font-size: 1.5rem; /* Was 1.3rem or 1.5rem */
+  margin-bottom: var(--spacing-sm); /* Consistent margin below h3 */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md); /* Consistent paragraph spacing */
+  color: var(--color-text-medium);
+  line-height: 1.7; /* Slightly increased line height for readability */
 }
 
 .App {
@@ -34,8 +59,19 @@ h1, h2, h3 {
 }
 
 main {
-  flex-grow: 1; /* Make main content area fill available space */
-  padding: 2rem 1rem;
+  flex-grow: 1;
+  /* Remove padding here, apply to sections instead for better control */
+}
+
+/* Add consistent bottom margin to main sections */
+.hero,
+.features,
+.how-it-works,
+.pricing,
+.contact {
+  margin-bottom: var(--spacing-xxl); /* Consistent spacing between sections */
+  padding-left: var(--spacing-sm); /* Consistent side padding */
+  padding-right: var(--spacing-sm);
 }
 
 /* Header Styles */
@@ -43,9 +79,9 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #003366; /* Dark Blue */
-  color: #EAEAEA; /* Light grey text */
-  padding: 0.75rem 2rem; /* Adjusted padding */
+  background-color: var(--color-primary); /* Use variable */
+  color: var(--color-text-inverted); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-lg); /* Adjusted padding with variables */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,34 +97,118 @@ header nav {
   /* Basic nav styling - will add links later */
 }
 
-header nav ul {
+/* Desktop Navigation Styles */
+.desktop-nav {
+  display: flex; /* Show on desktop */
+  gap: var(--spacing-md);
+  align-items: center; /* Align items vertically */
+}
+
+.desktop-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1.5rem; /* Spacing between links */
+  gap: var(--spacing-md);
 }
 
-header nav ul li {
+.desktop-nav ul li {
   display: inline;
 }
 
-header nav ul li a {
-  color: #EAEAEA; /* Light grey link text */
+.desktop-nav ul li a {
+  color: var(--color-text-inverted);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: var(--spacing-sm);
   font-weight: 500;
   transition: color 0.3s ease;
+  padding: var(--spacing-xs) 0; /* Add some vertical padding for larger click target */
 }
 
-header nav ul li a:hover {
-  color: #ffffff; /* White on hover */
+.desktop-nav ul li a:hover {
+  color: var(--color-background-white);
+}
+
+.desktop-nav .cta-button {
+  /* CTA Button within desktop nav inherits base styles */
+  margin-left: var(--spacing-sm); /* Add space before CTA */
+}
+
+/* Mobile Navigation Styles */
+.mobile-menu-button {
+  display: none; /* Hide on desktop */
+  background: none;
+  border: none;
+  color: var(--color-text-inverted);
+  font-size: 1.8rem; /* Adjust icon size */
+  cursor: pointer;
+  padding: 0 var(--spacing-xs); /* Adjust padding */
+}
+
+.mobile-nav {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position below header */
+  left: 0;
+  right: 0;
+  background-color: var(--color-primary); /* Same as header or slightly different */
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Below header sticky index */
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Optional separator */
+}
+
+.mobile-nav.open {
+  display: flex; /* Show when open */
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.mobile-nav ul li {
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-nav ul li a {
+  color: var(--color-text-inverted);
+  text-decoration: none;
+  font-size: 1.2rem; /* Larger font for mobile */
+  font-weight: 500;
+  padding: var(--spacing-sm) 0;
+  display: block; /* Make link take full width */
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav ul li a:hover {
+  background-color: var(--color-primary-dark); /* Darker background on hover */
+  color: var(--color-background-white);
+}
+
+.mobile-nav .cta-button {
+  /* Style mobile CTA if needed, maybe full width? */
+  width: 80%;
+  text-align: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 1.1rem;
 }
 
 .cta-button {
-  background-color: #1ABC9C; /* Teal Accent */
-  color: white;
-  padding: 0.6rem 1.2rem;
+  background-color: var(--color-accent); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-sm); /* Adjusted padding */
   border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
@@ -96,94 +216,109 @@ header nav ul li a:hover {
 }
 
 .cta-button:hover {
-  background-color: #16A085; /* Darker Teal on hover */
+  background-color: var(--color-accent-dark); /* Use variable */
   transform: translateY(-2px);
 }
 
 /* Hero Section Styles */
 .hero {
-  padding: 5rem 2rem; /* Increased padding */
-  background-color: #ffffff; /* White background */
-  margin-bottom: 3rem; /* Adjusted margin */
-  max-width: 1200px; /* Increased max-width for wider layout */
+  padding-top: var(--spacing-xxl);
+  padding-bottom: var(--spacing-xxl);
+  background-color: var(--color-background-white);
+  /* margin-bottom is now handled globally */
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  display: flex; /* Use Flexbox for two columns */
-  align-items: center; /* Vertically center items */
-  gap: 2rem; /* Space between columns */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl); /* Increased gap for image */
 }
 
 .hero-content {
-  flex: 1; /* Allow text content to take available space */
-  text-align: left; /* Align text to the left */
+  flex: 1; /* Take up remaining space */
+  text-align: left;
+  max-width: 600px; /* Limit text width */
 }
 
 .hero-image {
-  flex: 1; /* Allow image area to take available space */
-  /* Placeholder for image - styles can be added later */
-  display: none; /* Hide image area for now - uncomment when image is added */
+  flex: 1; /* Take up space */
+  display: block; /* Make it visible */
+  max-width: 50%; /* Control image size relative to flex container */
+  /* Add styles for the image itself if needed */
+  /* e.g., img { width: 100%; height: auto; border-radius: 8px; } */
+  text-align: center; /* Center image if needed */
+}
+
+.hero-image img { /* Example styling for an image inside */
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .hero h2 {
-  font-size: 2.8rem; /* Increased font size */
-  margin-bottom: 1.5rem; /* Adjusted margin */
-  line-height: 1.2; /* Adjust line height for larger font */
+  font-size: 2.8rem; /* Keep larger for Hero */
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
 }
 
 .hero p {
   font-size: 1.2rem;
-  color: #495057;
-  margin-bottom: 2rem; /* Adjusted margin */
-  font-family: 'Montserrat', sans-serif; /* Ensure body font */
-  max-width: 500px; /* Limit text width for readability */
+  color: var(--color-text-medium);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-primary);
+  max-width: 500px;
+  line-height: 1.6; /* Keep slightly tighter for hero lead */
 }
 
 .hero button {
-  background-color: #1ABC9C; /* Teal Accent */
-  color: white;
-  padding: 14px 28px; /* Slightly larger padding */
+  background-color: var(--color-accent);
+  color: var(--color-background-white);
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
-  font-weight: 500; /* Added font-weight */
+  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .hero button:hover {
-  background-color: #16A085; /* Darker Teal on hover */
-  transform: translateY(-2px); /* Add slight lift on hover */
+  background-color: var(--color-accent-dark); /* Use variable */
+  transform: translateY(-2px);
 }
 
 /* Features Section Styles */
 .features {
-  padding: 3rem 1rem;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .features h2 {
-  font-size: 2.2rem;
-  margin-bottom: 2.5rem;
+  /* font-size handled by global h2 */
+  /* margin-bottom handled by global h2 */
   text-align: center;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg); /* Use variable */
   text-align: left;
 }
 
 .feature-item {
-  background-color: #ffffff; /* White background for items */
-  padding: 2rem; /* Increased padding */
+  background-color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-lg); /* Use variable */
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center; /* Center align content */
+  text-align: center;
 }
 
 .feature-item:hover {
@@ -193,47 +328,50 @@ header nav ul li a:hover {
 
 /* Icon styles */
 .feature-icon {
-  font-size: 2.5rem; /* Icon size */
-  color: #1ABC9C; /* Use accent color */
-  margin-bottom: 1.5rem; /* Space below icon */
-  display: inline-block; /* Needed for margin */
+  font-size: 2.5rem;
+  color: var(--color-accent); /* Use variable */
+  margin-bottom: var(--spacing-md); /* Use variable */
+  display: inline-block;
 }
 
 .feature-item h3 {
-  font-size: 1.3rem;
-  color: #003366; /* Keep Dark Blue */
+  /* font-size handled by global h3 */
+  color: var(--color-primary);
   margin-top: 0;
-  margin-bottom: 0.75rem;
+  /* margin-bottom handled by global h3 */
 }
 
 .feature-item p {
-  font-size: 1rem;
-  color: #495057;
-  line-height: 1.6;
+  font-size: var(--spacing-sm); /* 1rem */
+  color: var(--color-text-medium);
+  /* line-height handled globally */
+  /* margin-bottom handled globally */
 }
 
 /* How It Works Section Styles */
 .how-it-works {
-  padding: 4rem 1rem; /* Adjusted padding */
-  background-color: #f8f9fa; /* Light grey background */
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-light);
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem; /* Adjusted margin */
+  margin-top: 0; /* Remove specific top margin */
   border-radius: 8px;
 }
 
 .how-it-works h2 {
-  font-size: 2.2rem;
-  margin-bottom: 3rem; /* Increased margin */
+  /* font-size handled by global h2 */
+  /* margin-bottom handled by global h2 */
   text-align: center;
 }
 
 .steps-container {
   display: flex;
   justify-content: space-around;
-  gap: 2rem;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: var(--spacing-lg); /* Use variable */
+  flex-wrap: wrap;
 }
 
 .step-item {
@@ -249,15 +387,15 @@ header nav ul li a:hover {
 
 /* New Icon Container */
 .step-icon-container {
-  display: inline-flex; /* Use inline-flex to center icon inside */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #1ABC9C; /* Teal Accent */
-  color: white;
-  width: 60px; /* Slightly larger circle */
+  background-color: var(--color-accent); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-bottom: 1.5rem; /* Space below circle */
+  margin-bottom: var(--spacing-md); /* Use variable */
 }
 
 .step-icon {
@@ -265,69 +403,75 @@ header nav ul li a:hover {
 }
 
 .step-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.75rem;
-  color: #003366; /* Match feature title color */
+  /* font-size handled by global h3 */
+  /* margin-bottom handled by global h3 */
+  color: var(--color-primary);
 }
 
 .step-item p {
-  font-size: 1rem;
-  color: #495057;
-  line-height: 1.6;
+  font-size: var(--spacing-sm);
+  color: var(--color-text-medium);
+  /* line-height handled globally */
+  /* margin-bottom handled globally */
 }
 
 /* Contact Section Styles */
 .contact {
-  padding: 4rem 2rem; /* Increased padding */
-  background-color: #f8f9fa; /* Light Grey Background */
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-light);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   max-width: 700px;
-  margin: 3rem auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0; /* Remove specific top margin */
 }
 
 .contact h2 {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
+  /* font-size handled globally */
+  /* margin-bottom handled globally (but maybe less here?) */
+  margin-bottom: var(--spacing-md); /* Reduce margin below h2 slightly for contact */
 }
 
 .contact p {
   text-align: center;
-  margin-bottom: 2rem;
-  color: #495057;
-  font-size: 1rem;
+  /* margin-bottom handled globally */
+  color: var(--color-text-medium);
+  font-size: var(--spacing-sm);
 }
 
 .contact form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--spacing-lg); /* Use variable */
 }
 
 /* Contact Section Inputs Redesign */
 .input-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--color-border); /* Use variable */
   border-radius: 8px;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--color-background-white); /* Use variable */
 }
 
 .input-wrapper .form-icon {
-  padding: 0 1rem;
-  color: #6c757d;
+  padding: 0 var(--spacing-sm); /* Use variable */
+  color: var(--color-text-light); /* Use variable */
   font-size: 1.2rem;
-  position: static; /* Remove absolute positioning */
+  position: static;
 }
 
 .input-wrapper input,
 .input-wrapper textarea {
   border: none;
-  padding: 1rem;
+  padding: var(--spacing-sm); /* Use variable */
   width: 100%;
-  font-size: 1rem;
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
   font-family: inherit;
   line-height: 1.4;
 }
@@ -342,41 +486,42 @@ header nav ul li a:hover {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-xs); /* Use variable */
 }
 
 .form-group label {
   font-weight: 500;
-  color: #343a40;
+  color: var(--color-text-dark); /* Use variable */
 }
 
 /* Submit button */
 .contact button[type="submit"] {
-  background-color: #1ABC9C;
-  color: white;
-  padding: 14px 28px;
+  background-color: var(--color-accent);
+  color: var(--color-background-white);
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  align-self: center;
-  margin-top: 1rem;
-  width: 50%;
+  align-self: center; /* Keep centered for now */
+  margin-top: var(--spacing-md); /* Use variable */
+  width: auto; /* Change from 50% */
+  min-width: 150px; /* Ensure a minimum width */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact button[type="submit"]:hover {
-  background-color: #16A085;
+  background-color: var(--color-accent-dark); /* Use variable */
   transform: translateY(-2px);
 }
 
 /* Footer Styles */
 footer {
-  background-color: #003366; /* Dark Blue */
-  color: #bdc3c7; /* Lighter grey/silver text */
-  padding: 2rem 1rem; /* Increased padding */
+  background-color: var(--color-primary); /* Use variable */
+  color: var(--color-text-inverted); /* Use variable */
+  padding: var(--spacing-lg) var(--spacing-sm); /* Use variables */
   text-align: center;
 }
 
@@ -387,37 +532,39 @@ footer p {
 
 /* Pricing Section Styles */
 .pricing {
-  padding: 4rem 1rem; /* Adjusted padding */
-  background-color: #ffffff; /* White background */
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-white);
 }
 
 .pricing h2 {
-  font-size: 2.2rem;
-  margin-bottom: 3rem; /* Adjusted margin */
+  /* font-size handled globally */
+  /* margin-bottom handled globally */
   text-align: center;
 }
 
 .pricing-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg); /* Use variable */
   max-width: 1100px;
   margin: 0 auto;
-  align-items: stretch; /* Make cards same height */
+  align-items: stretch;
 }
 
 .pricing-plan {
-  background-color: #ffffff; /* White card */
-  border: 1px solid #dee2e6; /* Light border */
-  border-radius: 10px; /* Slightly more rounded */
-  padding: 2rem 1.5rem;
+  background-color: var(--color-background-white); /* Use variable */
+  border: 1px solid var(--color-border); /* Use variable */
+  border-radius: 10px;
+  padding: var(--spacing-lg) var(--spacing-md); /* Use variables */
   text-align: center;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; /* Needed for badge positioning */
-  overflow: hidden; /* Hide badge overflow */
+  position: relative;
+  overflow: hidden;
 }
 
 .pricing-plan:hover {
@@ -427,11 +574,11 @@ footer p {
 
 /* Highlighted plan */
 .pricing-plan.featured {
-  border-color: #1ABC9C; /* Teal Accent for featured border */
+  border-color: var(--color-accent); /* Use variable */
   border-width: 2px;
   transform: scale(1.03);
   z-index: 1;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .pricing-plan.featured:hover {
@@ -441,11 +588,11 @@ footer p {
 /* Featured Badge Style */
 .featured-badge {
   position: absolute;
-  top: 15px; 
-  right: -40px; 
-  background-color: #16A085; /* Darker Teal */
-  color: white;
-  padding: 5px 40px; 
+  top: 15px;
+  right: -40px;
+  background-color: var(--color-accent-dark); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  padding: 5px 40px;
   font-size: 0.8rem;
   font-weight: bold;
   transform: rotate(45deg);
@@ -456,92 +603,229 @@ footer p {
 }
 
 .pricing-plan h3 {
-  font-size: 1.5rem; /* Slightly adjusted */
+  /* font-size handled globally */
   margin-top: 0;
-  margin-bottom: 1rem;
-  color: #003366; /* Match other titles */
+  /* margin-bottom handled globally */
+  color: var(--color-primary);
 }
 
 .price-tag {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md); /* Use variable */
 }
 
 .price-tag .price {
-  font-size: 2.8rem; /* Larger price */
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #1ABC9C; /* Teal Accent */
-  font-family: 'Montserrat', sans-serif;
+  color: var(--color-accent); /* Use variable */
+  font-family: var(--font-primary); /* Use variable */
 }
 
 .price-tag .frequency {
-  font-size: 1rem;
-  color: #6c757d; /* Grey text */
+  font-size: var(--spacing-sm);
+  color: var(--color-text-light);
   display: block;
-  margin-top: 0.25rem;
+  margin-top: var(--spacing-xs); /* Use variable */
 }
 
 .pricing-plan ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 var(--spacing-md) 0; /* Use variable */
   text-align: left;
   flex-grow: 1;
 }
 
 .pricing-plan ul li {
-  margin-bottom: 0.8rem; /* Slightly adjusted spacing */
-  color: #495057;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-medium);
   position: relative;
-  padding-left: 1.8rem; /* More space for checkmark */
-  line-height: 1.4;
+  padding-left: var(--spacing-md);
+  line-height: 1.5; /* Slightly adjusted line-height for lists */
 }
 
 /* Simple checkmark using pseudo-element */
 .pricing-plan ul li::before {
   content: '\f00c'; /* Font Awesome check icon */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900; /* Required for solid icons */
-  color: #1ABC9C; /* Use accent color for check */
+  font-family: 'Font Awesome 6 Free'; /* Ensure Font Awesome is loaded */
+  font-weight: 900; /* Use solid style */
+  color: var(--color-accent); /* Use variable */
   position: absolute;
   left: 0;
   top: 1px; /* Adjust vertical alignment */
-  font-size: 0.9rem;
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
 }
 
+/* Optional: Style for features not included */
+.pricing-plan ul li.not-included {
+  color: var(--color-text-light); /* Use variable */
+  text-decoration: line-through;
+}
+
+.pricing-plan ul li.not-included::before {
+  content: '\f00d'; /* Font Awesome times icon */
+  color: var(--color-text-light); /* Use variable */
+}
+
+/* Discount info - if added */
 .discount-info {
+  margin-top: var(--spacing-md);
   font-size: 0.9rem;
-  color: #5a86a4; /* Slightly different blue for info */
-  font-weight: 500;
-  margin-top: auto;
-  margin-bottom: 1.5rem; /* Increased margin */
+  color: var(--color-text-medium);
+  background-color: var(--color-accent-light); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  display: inline-block;
 }
 
 .pricing-plan button {
-  background-color: #1ABC9C; /* Teal Accent */
-  color: white;
-  padding: 12px 24px; /* Adjusted padding */
+  background-color: var(--color-primary); /* Use variable - Primary action for non-featured */
+  color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: auto;
-  width: 80%;
-  align-self: center;
-  font-family: 'Montserrat', sans-serif;
+  margin-top: auto; /* Push button to bottom */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 0.5px; /* Add letter spacing */
+  width: 100%; /* Make button full width of card */
+  box-sizing: border-box; /* Include padding in width */
+  font-family: var(--font-primary); /* Use variable */
 }
 
+/* Featured plan button uses accent color */
 .pricing-plan.featured button {
-    background-color: #16A085; /* Darker Teal for featured plan button */
+  background-color: var(--color-accent); /* Use variable */
 }
 
 .pricing-plan button:hover {
-  background-color: #16A085; /* Darker Teal on hover */
-  transform: scale(1.05); /* Add scale effect on hover */
+  background-color: var(--color-accent-dark); /* Use variable - Maybe different hover for primary? */
+  transform: translateY(-2px);
 }
 
-/* Remove default CRA styles if present */
-/* .App-logo { ... } */
-/* .App-header { ... } */
-/* .App-link { ... } */
+/* Specific hover for primary button if needed */
+.pricing-plan:not(.featured) button:hover {
+   background-color: var(--color-primary-dark); /* Use variable */
+}
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  /* Adjust global section margin for mobile */
+  .hero,
+  .features,
+  .how-it-works,
+  .pricing,
+  .contact {
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+
+  .hero {
+    flex-direction: column-reverse; /* Stack image below text */
+    text-align: center;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    gap: var(--spacing-lg); /* Adjust gap for stacked layout */
+  }
+
+  .hero-content {
+    text-align: center; /* Center text on mobile */
+    max-width: 100%; /* Allow text to fill width */
+  }
+
+  .hero-image {
+    max-width: 80%; /* Allow image to be larger on mobile stack */
+    margin-bottom: var(--spacing-lg); /* Add space below image when stacked */
+  }
+
+  .hero h2 {
+    font-size: 2.2rem; /* Keep slightly larger on mobile hero */
+  }
+
+  .hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+
+  .steps-container {
+    flex-direction: column; /* Stack steps vertically */
+    align-items: center; /* Center steps */
+  }
+
+  .step-item {
+    max-width: 90%; /* Allow steps to take more width */
+  }
+
+  .contact {
+    padding: var(--spacing-xl) var(--spacing-sm); /* Adjust padding */
+  }
+
+   .contact button[type="submit"] {
+    width: 100%; /* Full width button on mobile */
+    min-width: unset; /* Remove min-width */
+  }
+
+  header {
+    padding: var(--spacing-xs) var(--spacing-sm); /* Adjust header padding */
+  }
+
+  /* Remove gap from ul in mobile (handled by flex column gap) */
+  header nav ul {
+    gap: 0;
+  }
+
+  .desktop-nav {
+    display: none; /* Hide desktop nav */
+  }
+
+  .mobile-menu-button {
+    display: block; /* Show burger button */
+  }
+
+  .pricing-container {
+     grid-template-columns: 1fr; /* Single column */
+  }
+
+   .pricing-plan.featured {
+     transform: scale(1); /* Disable scaling on mobile maybe? */
+   }
+   .pricing-plan.featured:hover {
+    transform: translateY(-5px); /* Keep hover effect */
+   }
+}
+
+@media (max-width: 480px) {
+  h1 {
+     font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  .hero h2 {
+    font-size: 2rem;
+  }
+  /* Remove the old display: none for header nav */
+  /* header nav { */
+  /*   display: none; */
+  /* } */
+}

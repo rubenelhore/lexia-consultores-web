@@ -1,4 +1,5 @@
 import React from 'react';
+import heroImage from '../assets/hero-image.png'; // Adjust filename if needed
 
 const HeroSection: React.FC = () => {
   // Smooth scroll to contact section
@@ -18,6 +19,7 @@ const HeroSection: React.FC = () => {
       </div>
       <div className="hero-image">
         {/* Image will go here */}
+        <img src={heroImage} alt="Consultoría legal MASC" />
       </div>
     </section>
   );

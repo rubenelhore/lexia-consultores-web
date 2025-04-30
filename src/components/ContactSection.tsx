@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -15,13 +17,19 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., send data to an API)
-    console.log("Form data submitted:", formData);
-    alert("Gracias por tu mensaje. Nos pondremos en contacto pronto.");
-    // Optionally reset form
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      // Save form data to Firestore collection 'contactMessages'
+      console.log("Datos a guardar en Firestore:", formData);
+      await addDoc(collection(db, 'contactMessages'), formData);
+      alert('Gracias por tu mensaje. Nos pondremos en contacto pronto.');
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error: any) {
+      console.error("Firestore write failed:", error.code, error.message);
+      alert('Hubo un error al enviar tu mensaje. Revisa la consola.');
+    }
   };
 
   return (
