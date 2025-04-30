@@ -11,11 +11,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-<<<<<<< HEAD
     "firebase": "^11.6.1",
-=======
-    "firebase": "^11.6.0",
->>>>>>> 7007dc5d2dd58701a6f3e51144f026991369901b
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
