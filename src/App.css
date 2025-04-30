@@ -21,7 +21,7 @@ code {
 
 /* Headings Font */
 h1, h2, h3 {
-  font-family: 'Merriweather', serif; /* Apply Merriweather to headings */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
   color: #003366; /* Default heading color - Dark Blue */
   font-weight: 700;
 }
@@ -40,9 +40,12 @@ main {
 
 /* Header Styles */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background-color: #003366; /* Dark Blue */
   color: #EAEAEA; /* Light grey text */
-  padding: 0.5rem 2rem; /* Adjust padding */
+  padding: 0.75rem 2rem; /* Adjusted padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,43 +85,75 @@ header nav ul li a:hover {
   color: #ffffff; /* White on hover */
 }
 
+.cta-button {
+  background-color: #1ABC9C; /* Teal Accent */
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #16A085; /* Darker Teal on hover */
+  transform: translateY(-2px);
+}
+
 /* Hero Section Styles */
 .hero {
-  padding: 4rem 1rem;
-  background-color: #f8f9fa; /* Light grey background */
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  max-width: 900px;
+  padding: 5rem 2rem; /* Increased padding */
+  background-color: #ffffff; /* White background */
+  margin-bottom: 3rem; /* Adjusted margin */
+  max-width: 1200px; /* Increased max-width for wider layout */
   margin-left: auto;
   margin-right: auto;
+  display: flex; /* Use Flexbox for two columns */
+  align-items: center; /* Vertically center items */
+  gap: 2rem; /* Space between columns */
+}
+
+.hero-content {
+  flex: 1; /* Allow text content to take available space */
+  text-align: left; /* Align text to the left */
+}
+
+.hero-image {
+  flex: 1; /* Allow image area to take available space */
+  /* Placeholder for image - styles can be added later */
+  display: none; /* Hide image area for now - uncomment when image is added */
 }
 
 .hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2.8rem; /* Increased font size */
+  margin-bottom: 1.5rem; /* Adjusted margin */
+  line-height: 1.2; /* Adjust line height for larger font */
 }
 
 .hero p {
   font-size: 1.2rem;
   color: #495057;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem; /* Adjusted margin */
   font-family: 'Montserrat', sans-serif; /* Ensure body font */
+  max-width: 500px; /* Limit text width for readability */
 }
 
 .hero button {
-  background-color: #6C7A89; /* Muted Blue Accent */
+  background-color: #1ABC9C; /* Teal Accent */
   color: white;
-  padding: 12px 24px;
+  padding: 14px 28px; /* Slightly larger padding */
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
+  font-weight: 500; /* Added font-weight */
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Montserrat', sans-serif; /* Ensure body font */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hero button:hover {
-  background-color: #57646f; /* Darker Muted Blue on hover */
+  background-color: #16A085; /* Darker Teal on hover */
+  transform: translateY(-2px); /* Add slight lift on hover */
 }
 
 /* Features Section Styles */
@@ -144,10 +179,11 @@ header nav ul li a:hover {
 
 .feature-item {
   background-color: #ffffff; /* White background for items */
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center; /* Center align content */
 }
 
 .feature-item:hover {
@@ -155,9 +191,17 @@ header nav ul li a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+/* Icon styles */
+.feature-icon {
+  font-size: 2.5rem; /* Icon size */
+  color: #1ABC9C; /* Use accent color */
+  margin-bottom: 1.5rem; /* Space below icon */
+  display: inline-block; /* Needed for margin */
+}
+
 .feature-item h3 {
   font-size: 1.3rem;
-  color: #003366; /* Keep Dark Blue or use Muted Blue #6C7A89 ? Let's keep Dark Blue for now */
+  color: #003366; /* Keep Dark Blue */
   margin-top: 0;
   margin-bottom: 0.75rem;
 }
@@ -170,18 +214,18 @@ header nav ul li a:hover {
 
 /* How It Works Section Styles */
 .how-it-works {
-  padding: 3rem 1rem;
+  padding: 4rem 1rem; /* Adjusted padding */
   background-color: #f8f9fa; /* Light grey background */
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
+  margin-top: 3rem; /* Adjusted margin */
   border-radius: 8px;
 }
 
 .how-it-works h2 {
   font-size: 2.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem; /* Increased margin */
   text-align: center;
 }
 
@@ -200,23 +244,30 @@ header nav ul li a:hover {
   padding: 1rem;
 }
 
-.step-number {
-  display: inline-block;
-  background-color: #6C7A89; /* Muted Blue Accent */
+/* Remove old step number */
+/* .step-number { ... } */
+
+/* New Icon Container */
+.step-icon-container {
+  display: inline-flex; /* Use inline-flex to center icon inside */
+  align-items: center;
+  justify-content: center;
+  background-color: #1ABC9C; /* Teal Accent */
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 60px; /* Slightly larger circle */
+  height: 60px;
   border-radius: 50%;
-  margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif; /* Ensure non-serif font */
+  margin-bottom: 1.5rem; /* Space below circle */
+}
+
+.step-icon {
+ font-size: 1.8rem; /* Icon size */
 }
 
 .step-item h3 {
   font-size: 1.3rem;
   margin-bottom: 0.75rem;
+  color: #003366; /* Match feature title color */
 }
 
 .step-item p {
@@ -227,103 +278,122 @@ header nav ul li a:hover {
 
 /* Contact Section Styles */
 .contact {
-  padding: 3rem 1rem;
-  max-width: 700px; /* Narrower width for form */
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
+  padding: 4rem 2rem; /* Increased padding */
   background-color: #f8f9fa; /* Light Grey Background */
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin: 3rem auto;
 }
 
 .contact h2 {
+  text-align: center;
   font-size: 2.2rem;
   margin-bottom: 1rem;
-  text-align: center;
 }
 
 .contact p {
   text-align: center;
   margin-bottom: 2rem;
   color: #495057;
+  font-size: 1rem;
 }
 
 .contact form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
+/* Contact Section Inputs Redesign */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.input-wrapper .form-icon {
+  padding: 0 1rem;
+  color: #6c757d;
+  font-size: 1.2rem;
+  position: static; /* Remove absolute positioning */
+}
+
+.input-wrapper input,
+.input-wrapper textarea {
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.input-wrapper input:focus,
+.input-wrapper textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove previous absolute positioning for form-icon */
 .form-group {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-group label {
-  margin-bottom: 0.5rem;
   font-weight: 500;
   color: #343a40;
-  text-align: left;
 }
 
-.form-group input,
-.form-group textarea {
-  padding: 0.8rem;
-  border: 1px solid #ced4da; /* Light grey border */
-  border-radius: 5px;
-  font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #0056b3; /* Medium Blue on focus */
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
-}
-
+/* Submit button */
 .contact button[type="submit"] {
-  background-color: #6C7A89; /* Muted Blue Accent */
+  background-color: #1ABC9C;
   color: white;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  align-self: center; /* Center button */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: center;
   margin-top: 1rem;
-  font-family: 'Montserrat', sans-serif;
+  width: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact button[type="submit"]:hover {
-  background-color: #57646f; /* Darker Muted Blue on hover */
+  background-color: #16A085;
+  transform: translateY(-2px);
 }
 
 /* Footer Styles */
 footer {
   background-color: #003366; /* Dark Blue */
   color: #bdc3c7; /* Lighter grey/silver text */
-  padding: 1.5rem 1rem;
-  margin-top: auto; /* Push footer to the bottom */
-  font-size: 0.9rem;
+  padding: 2rem 1rem; /* Increased padding */
+  text-align: center;
 }
 
 footer p {
   margin: 0;
+  font-size: 0.9rem;
 }
 
 /* Pricing Section Styles */
 .pricing {
-  padding: 3rem 1rem;
+  padding: 4rem 1rem; /* Adjusted padding */
   background-color: #ffffff; /* White background */
 }
 
 .pricing h2 {
   font-size: 2.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem; /* Adjusted margin */
   text-align: center;
 }
 
@@ -339,13 +409,15 @@ footer p {
 .pricing-plan {
   background-color: #ffffff; /* White card */
   border: 1px solid #dee2e6; /* Light border */
-  border-radius: 8px;
+  border-radius: 10px; /* Slightly more rounded */
   padding: 2rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Needed for badge positioning */
+  overflow: hidden; /* Hide badge overflow */
 }
 
 .pricing-plan:hover {
@@ -355,20 +427,39 @@ footer p {
 
 /* Highlighted plan */
 .pricing-plan.featured {
-  border-color: #6C7A89; /* Muted Blue Accent for featured border */
+  border-color: #1ABC9C; /* Teal Accent for featured border */
   border-width: 2px;
-  transform: scale(1.03); /* Slightly larger */
+  transform: scale(1.03);
   z-index: 1;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
 }
 
 .pricing-plan.featured:hover {
     transform: scale(1.05) translateY(-5px);
 }
 
+/* Featured Badge Style */
+.featured-badge {
+  position: absolute;
+  top: 15px; 
+  right: -40px; 
+  background-color: #16A085; /* Darker Teal */
+  color: white;
+  padding: 5px 40px; 
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(45deg);
+  transform-origin: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
 .pricing-plan h3 {
-  font-size: 1.6rem;
+  font-size: 1.5rem; /* Slightly adjusted */
   margin-top: 0;
   margin-bottom: 1rem;
+  color: #003366; /* Match other titles */
 }
 
 .price-tag {
@@ -376,16 +467,16 @@ footer p {
 }
 
 .price-tag .price {
-  font-size: 2.5rem;
+  font-size: 2.8rem; /* Larger price */
   font-weight: bold;
-  color: #6C7A89; /* Muted Blue Accent */
-  font-family: 'Montserrat', sans-serif; /* Price looks better sans-serif */
+  color: #1ABC9C; /* Teal Accent */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .price-tag .frequency {
   font-size: 1rem;
   color: #6c757d; /* Grey text */
-  display: block; /* Or inline-block */
+  display: block;
   margin-top: 0.25rem;
 }
 
@@ -394,56 +485,60 @@ footer p {
   padding: 0;
   margin: 0 0 1.5rem 0;
   text-align: left;
-  flex-grow: 1; /* Allows ul to grow and push button down */
+  flex-grow: 1;
 }
 
 .pricing-plan ul li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.8rem; /* Slightly adjusted spacing */
   color: #495057;
   position: relative;
-  padding-left: 1.5rem; /* Space for checkmark */
+  padding-left: 1.8rem; /* More space for checkmark */
+  line-height: 1.4;
 }
 
 /* Simple checkmark using pseudo-element */
 .pricing-plan ul li::before {
-  content: '✓'; /* Checkmark symbol */
-  color: #28a745; /* Green color */
-  font-weight: bold;
+  content: '\f00c'; /* Font Awesome check icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; /* Required for solid icons */
+  color: #1ABC9C; /* Use accent color for check */
   position: absolute;
   left: 0;
-  top: 0;
+  top: 1px; /* Adjust vertical alignment */
+  font-size: 0.9rem;
 }
 
 .discount-info {
   font-size: 0.9rem;
   color: #5a86a4; /* Slightly different blue for info */
   font-weight: 500;
-  margin-top: auto; /* Push discount info towards button */
-  margin-bottom: 1rem;
+  margin-top: auto;
+  margin-bottom: 1.5rem; /* Increased margin */
 }
 
 .pricing-plan button {
-  background-color: #6C7A89; /* Muted Blue Accent */
+  background-color: #1ABC9C; /* Teal Accent */
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px; /* Adjusted padding */
   border: none;
   border-radius: 5px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: auto; /* Push button to bottom */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
   width: 80%;
   align-self: center;
   font-family: 'Montserrat', sans-serif;
 }
 
 .pricing-plan.featured button {
-    background-color: #57646f; /* Darker Muted Blue for featured plan button */
+    background-color: #16A085; /* Darker Teal for featured plan button */
 }
 
 .pricing-plan button:hover {
-  background-color: #57646f; /* Darker Muted Blue on hover */
+  background-color: #16A085; /* Darker Teal on hover */
+  transform: scale(1.05); /* Add scale effect on hover */
 }
 
 /* Remove default CRA styles if present */

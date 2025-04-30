@@ -9,10 +9,10 @@ const Header: React.FC = () => {
         <ul>
           <li><a href="#features">Características</a></li>
           <li><a href="#how-it-works">¿Cómo Funciona?</a></li>
-          <li><a href="#pricing">Precios</a></li>
           <li><a href="#contact">Contacto</a></li>
         </ul>
       </nav>
+      <a href="#contact" className="cta-button">Solicita Consulta</a>
     </header>
   );
 };

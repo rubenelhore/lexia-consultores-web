@@ -31,36 +31,45 @@ const ContactSection: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Nombre:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <div className="input-wrapper">
+            <i className="form-icon fa-solid fa-user"></i>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="email">Correo Electrónico:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <div className="input-wrapper">
+            <i className="form-icon fa-regular fa-envelope"></i>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="message">Mensaje:</label>
-          <textarea
-            id="message"
-            name="message"
-            rows={5}
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
+          <div className="input-wrapper">
+            <i className="form-icon fa-solid fa-comment-dots"></i>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
         </div>
         <button type="submit">Enviar Mensaje</button>
       </form>

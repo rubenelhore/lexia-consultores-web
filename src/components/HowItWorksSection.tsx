@@ -1,22 +1,37 @@
 import React from 'react';
 
+interface StepItemProps {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const StepItem: React.FC<StepItemProps> = ({ title, description, icon }) => (
+  <div className="step-item">
+    <div className="step-icon-container">
+       <i className={`step-icon ${icon}`}></i>
+    </div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+);
+
 const HowItWorksSection: React.FC = () => {
-  // Placeholder steps
   const steps = [
     {
-      step: 1,
-      title: "Registro e Integración",
-      description: "Crea tu cuenta y conecta tus fuentes de datos o sube documentos de forma segura."
+      icon: "fa-solid fa-user-plus",
+      title: "1. Espacio Profesional Híbrido",
+      description: "Elige tu plan de coworking con salas de juntas y hot-desk para recibir clientes con credibilidad."
     },
     {
-      step: 2,
-      title: "Procesamiento con IA",
-      description: "Nuestra IA analiza la información, busca patrones y aplica modelos legales entrenados para México."
+      icon: "fa-solid fa-gears",
+      title: "2. Consultoría Itinerante",
+      description: "Atendemos controversias en tus oficinas o domicilio, con firma electrónica avanzada para convenios."
     },
     {
-      step: 3,
-      title: "Resultados y Acciones",
-      description: "Recibe análisis claros, resúmenes, alertas y predicciones directamente en tu panel de control."
+      icon: "fa-solid fa-chart-line",
+      title: "3. Validación y Seguimiento",
+      description: "Emitimos y damos seguimiento a convenios con calidad de cosa juzgada y reportes detallados."
     }
   ];
 
@@ -24,12 +39,8 @@ const HowItWorksSection: React.FC = () => {
     <section id="how-it-works" className="how-it-works">
       <h2>¿Cómo Funciona?</h2>
       <div className="steps-container">
-        {steps.map((item) => (
-          <div key={item.step} className="step-item">
-            <div className="step-number">{item.step}</div>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </div>
+        {steps.map((item, index) => (
+          <StepItem key={index} title={item.title} description={item.description} icon={item.icon} />
         ))}
       </div>
     </section>
