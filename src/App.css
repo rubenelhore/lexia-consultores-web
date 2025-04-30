@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+/* General Reset & Base Styles */
+body {
+  margin: 0;
+  font-family: var(--font-primary), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background-white);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  font-size: 16px; /* Base font size */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Headings Font */
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.3; /* Consistent line height for headings */
+  margin-top: 0; /* Remove default top margin */
+}
+
+h1 {
+  font-size: 3rem; /* Example size, adjust as needed */
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: 2.2rem; /* Was 2.2rem in most places */
+  margin-bottom: var(--spacing-lg); /* Consistent margin below h2 */
+}
+
+h3 {
+  font-size: 1.5rem; /* Was 1.3rem or 1.5rem */
+  margin-bottom: var(--spacing-sm); /* Consistent margin below h3 */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md); /* Consistent paragraph spacing */
+  color: var(--color-text-medium);
+  line-height: 1.7; /* Slightly increased line height for readability */
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  /* Remove padding here, apply to sections instead for better control */
+}
+
+/* Add consistent bottom margin to main sections */
+.hero,
+.features,
+.how-it-works,
+.pricing,
+.contact {
+  margin-bottom: var(--spacing-xxl); /* Consistent spacing between sections */
+  padding-left: var(--spacing-sm); /* Consistent side padding */
+  padding-right: var(--spacing-sm);
+}
+
+/* Header Styles */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--color-primary); /* Use variable */
+  color: var(--color-text-inverted); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-lg); /* Adjusted padding with variables */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  height: 50px; /* Adjust height as needed */
+  width: auto;
+}
+
+header nav {
+  /* Basic nav styling - will add links later */
+}
+
+/* Desktop Navigation Styles */
+.desktop-nav {
+  display: flex; /* Show on desktop */
+  gap: var(--spacing-md);
+  align-items: center; /* Align items vertically */
+}
+
+.desktop-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.desktop-nav ul li {
+  display: inline;
+}
+
+.desktop-nav ul li a {
+  color: var(--color-text-inverted);
+  text-decoration: none;
+  font-size: var(--spacing-sm);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: var(--spacing-xs) 0; /* Add some vertical padding for larger click target */
+}
+
+.desktop-nav ul li a:hover {
+  color: var(--color-background-white);
+}
+
+.desktop-nav .cta-button {
+  /* CTA Button within desktop nav inherits base styles */
+  margin-left: var(--spacing-sm); /* Add space before CTA */
+}
+
+/* Mobile Navigation Styles */
+.mobile-menu-button {
+  display: none; /* Hide on desktop */
+  background: none;
+  border: none;
+  color: var(--color-text-inverted);
+  font-size: 1.8rem; /* Adjust icon size */
+  cursor: pointer;
+  padding: 0 var(--spacing-xs); /* Adjust padding */
+}
+
+.mobile-nav {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position below header */
+  left: 0;
+  right: 0;
+  background-color: var(--color-primary); /* Same as header or slightly different */
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Below header sticky index */
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Optional separator */
+}
+
+.mobile-nav.open {
+  display: flex; /* Show when open */
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.mobile-nav ul li {
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-nav ul li a {
+  color: var(--color-text-inverted);
+  text-decoration: none;
+  font-size: 1.2rem; /* Larger font for mobile */
+  font-weight: 500;
+  padding: var(--spacing-sm) 0;
+  display: block; /* Make link take full width */
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav ul li a:hover {
+  background-color: var(--color-primary-dark); /* Darker background on hover */
+  color: var(--color-background-white);
+}
+
+.mobile-nav .cta-button {
+  /* Style mobile CTA if needed, maybe full width? */
+  width: 80%;
+  text-align: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+.cta-button {
+  background-color: var(--color-accent); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-sm); /* Adjusted padding */
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--color-accent-dark); /* Use variable */
+  transform: translateY(-2px);
+}
+
+/* Hero Section Styles */
+.hero {
+  padding-top: var(--spacing-xxl);
+  padding-bottom: var(--spacing-xxl);
+  background-color: var(--color-background-white);
+  /* margin-bottom is now handled globally */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl); /* Increased gap for image */
+}
+
+.hero-content {
+  flex: 1; /* Take up remaining space */
+  text-align: left;
+  max-width: 600px; /* Limit text width */
+}
+
+.hero-image {
+  flex: 1; /* Take up space */
+  display: block; /* Make it visible */
+  max-width: 50%; /* Control image size relative to flex container */
+  /* Add styles for the image itself if needed */
+  /* e.g., img { width: 100%; height: auto; border-radius: 8px; } */
+  text-align: center; /* Center image if needed */
+}
+
+.hero-image img { /* Example styling for an image inside */
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero h2 {
+  font-size: 2.8rem; /* Keep larger for Hero */
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--color-text-medium);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-primary);
+  max-width: 500px;
+  line-height: 1.6; /* Keep slightly tighter for hero lead */
+}
+
+.hero button {
+  background-color: var(--color-accent);
+  color: var(--color-background-white);
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-family: var(--font-primary);
+}
+
+.hero button:hover {
+  background-color: var(--color-accent-dark); /* Use variable */
+  transform: translateY(-2px);
+}
+
+/* Features Section Styles */
+.features {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features h2 {
+  /* font-size handled by global h2 */
+  /* margin-bottom handled by global h2 */
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg); /* Use variable */
+  text-align: left;
+}
+
+.feature-item {
+  background-color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-lg); /* Use variable */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Icon styles */
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--color-accent); /* Use variable */
+  margin-bottom: var(--spacing-md); /* Use variable */
+  display: inline-block;
+}
+
+.feature-item h3 {
+  /* font-size handled by global h3 */
+  color: var(--color-primary);
+  margin-top: 0;
+  /* margin-bottom handled by global h3 */
+}
+
+.feature-item p {
+  font-size: var(--spacing-sm); /* 1rem */
+  color: var(--color-text-medium);
+  /* line-height handled globally */
+  /* margin-bottom handled globally */
+}
+
+/* How It Works Section Styles */
+.how-it-works {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-light);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0; /* Remove specific top margin */
+  border-radius: 8px;
+}
+
+.how-it-works h2 {
+  /* font-size handled by global h2 */
+  /* margin-bottom handled by global h2 */
+  text-align: center;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--spacing-lg); /* Use variable */
+  flex-wrap: wrap;
+}
+
+.step-item {
+  flex: 1;
+  min-width: 220px; /* Minimum width before wrapping */
+  max-width: 300px; /* Max width per item */
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Remove old step number */
+/* .step-number { ... } */
+
+/* New Icon Container */
+.step-icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-md); /* Use variable */
+}
+
+.step-icon {
+ font-size: 1.8rem; /* Icon size */
+}
+
+.step-item h3 {
+  /* font-size handled by global h3 */
+  /* margin-bottom handled by global h3 */
+  color: var(--color-primary);
+}
+
+.step-item p {
+  font-size: var(--spacing-sm);
+  color: var(--color-text-medium);
+  /* line-height handled globally */
+  /* margin-bottom handled globally */
+}
+
+/* Contact Section Styles */
+.contact {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0; /* Remove specific top margin */
+}
+
+.contact h2 {
+  text-align: center;
+  /* font-size handled globally */
+  /* margin-bottom handled globally (but maybe less here?) */
+  margin-bottom: var(--spacing-md); /* Reduce margin below h2 slightly for contact */
+}
+
+.contact p {
+  text-align: center;
+  /* margin-bottom handled globally */
+  color: var(--color-text-medium);
+  font-size: var(--spacing-sm);
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg); /* Use variable */
+}
+
+/* Contact Section Inputs Redesign */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border); /* Use variable */
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--color-background-white); /* Use variable */
+}
+
+.input-wrapper .form-icon {
+  padding: 0 var(--spacing-sm); /* Use variable */
+  color: var(--color-text-light); /* Use variable */
+  font-size: 1.2rem;
+  position: static;
+}
+
+.input-wrapper input,
+.input-wrapper textarea {
+  border: none;
+  padding: var(--spacing-sm); /* Use variable */
+  width: 100%;
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.input-wrapper input:focus,
+.input-wrapper textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove previous absolute positioning for form-icon */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs); /* Use variable */
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--color-text-dark); /* Use variable */
+}
+
+/* Submit button */
+.contact button[type="submit"] {
+  background-color: var(--color-accent);
+  color: var(--color-background-white);
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: center; /* Keep centered for now */
+  margin-top: var(--spacing-md); /* Use variable */
+  width: auto; /* Change from 50% */
+  min-width: 150px; /* Ensure a minimum width */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact button[type="submit"]:hover {
+  background-color: var(--color-accent-dark); /* Use variable */
+  transform: translateY(-2px);
+}
+
+/* Footer Styles */
+footer {
+  background-color: var(--color-primary); /* Use variable */
+  color: var(--color-text-inverted); /* Use variable */
+  padding: var(--spacing-lg) var(--spacing-sm); /* Use variables */
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Pricing Section Styles */
+.pricing {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  /* margin-bottom handled globally */
+  background-color: var(--color-background-white);
+}
+
+.pricing h2 {
+  /* font-size handled globally */
+  /* margin-bottom handled globally */
+  text-align: center;
+}
+
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg); /* Use variable */
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.pricing-plan {
+  background-color: var(--color-background-white); /* Use variable */
+  border: 1px solid var(--color-border); /* Use variable */
+  border-radius: 10px;
+  padding: var(--spacing-lg) var(--spacing-md); /* Use variables */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Highlighted plan */
+.pricing-plan.featured {
+  border-color: var(--color-accent); /* Use variable */
+  border-width: 2px;
+  transform: scale(1.03);
+  z-index: 1;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-plan.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+/* Featured Badge Style */
+.featured-badge {
+  position: absolute;
+  top: 15px;
+  right: -40px;
+  background-color: var(--color-accent-dark); /* Use variable */
+  color: var(--color-background-white); /* Use variable */
+  padding: 5px 40px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(45deg);
+  transform-origin: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+.pricing-plan h3 {
+  /* font-size handled globally */
+  margin-top: 0;
+  /* margin-bottom handled globally */
+  color: var(--color-primary);
+}
+
+.price-tag {
+  margin-bottom: var(--spacing-md); /* Use variable */
+}
+
+.price-tag .price {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--color-accent); /* Use variable */
+  font-family: var(--font-primary); /* Use variable */
+}
+
+.price-tag .frequency {
+  font-size: var(--spacing-sm);
+  color: var(--color-text-light);
+  display: block;
+  margin-top: var(--spacing-xs); /* Use variable */
+}
+
+.pricing-plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-md) 0; /* Use variable */
+  text-align: left;
+  flex-grow: 1;
+}
+
+.pricing-plan ul li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-medium);
+  position: relative;
+  padding-left: var(--spacing-md);
+  line-height: 1.5; /* Slightly adjusted line-height for lists */
+}
+
+/* Simple checkmark using pseudo-element */
+.pricing-plan ul li::before {
+  content: '\f00c'; /* Font Awesome check icon */
+  font-family: 'Font Awesome 6 Free'; /* Ensure Font Awesome is loaded */
+  font-weight: 900; /* Use solid style */
+  color: var(--color-accent); /* Use variable */
+  position: absolute;
+  left: 0;
+  top: 1px; /* Adjust vertical alignment */
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
+}
+
+/* Optional: Style for features not included */
+.pricing-plan ul li.not-included {
+  color: var(--color-text-light); /* Use variable */
+  text-decoration: line-through;
+}
+
+.pricing-plan ul li.not-included::before {
+  content: '\f00d'; /* Font Awesome times icon */
+  color: var(--color-text-light); /* Use variable */
+}
+
+/* Discount info - if added */
+.discount-info {
+  margin-top: var(--spacing-md);
+  font-size: 0.9rem;
+  color: var(--color-text-medium);
+  background-color: var(--color-accent-light); /* Use variable */
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.pricing-plan button {
+  background-color: var(--color-primary); /* Use variable - Primary action for non-featured */
+  color: var(--color-background-white); /* Use variable */
+  padding: var(--spacing-sm) var(--spacing-lg); /* Use variables */
+  border: none;
+  border-radius: 5px;
+  font-size: var(--spacing-sm); /* Use variable (1rem) */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: auto; /* Push button to bottom */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 0.5px; /* Add letter spacing */
+  width: 100%; /* Make button full width of card */
+  box-sizing: border-box; /* Include padding in width */
+  font-family: var(--font-primary); /* Use variable */
+}
+
+/* Featured plan button uses accent color */
+.pricing-plan.featured button {
+  background-color: var(--color-accent); /* Use variable */
+}
+
+.pricing-plan button:hover {
+  background-color: var(--color-accent-dark); /* Use variable - Maybe different hover for primary? */
+  transform: translateY(-2px);
+}
+
+/* Specific hover for primary button if needed */
+.pricing-plan:not(.featured) button:hover {
+   background-color: var(--color-primary-dark); /* Use variable */
+}
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  /* Adjust global section margin for mobile */
+  .hero,
+  .features,
+  .how-it-works,
+  .pricing,
+  .contact {
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+
+  .hero {
+    flex-direction: column-reverse; /* Stack image below text */
+    text-align: center;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    gap: var(--spacing-lg); /* Adjust gap for stacked layout */
+  }
+
+  .hero-content {
+    text-align: center; /* Center text on mobile */
+    max-width: 100%; /* Allow text to fill width */
+  }
+
+  .hero-image {
+    max-width: 80%; /* Allow image to be larger on mobile stack */
+    margin-bottom: var(--spacing-lg); /* Add space below image when stacked */
+  }
+
+  .hero h2 {
+    font-size: 2.2rem; /* Keep slightly larger on mobile hero */
+  }
+
+  .hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+
+  .steps-container {
+    flex-direction: column; /* Stack steps vertically */
+    align-items: center; /* Center steps */
+  }
+
+  .step-item {
+    max-width: 90%; /* Allow steps to take more width */
+  }
+
+  .contact {
+    padding: var(--spacing-xl) var(--spacing-sm); /* Adjust padding */
+  }
+
+   .contact button[type="submit"] {
+    width: 100%; /* Full width button on mobile */
+    min-width: unset; /* Remove min-width */
+  }
+
+  header {
+    padding: var(--spacing-xs) var(--spacing-sm); /* Adjust header padding */
+  }
+
+  /* Remove gap from ul in mobile (handled by flex column gap) */
+  header nav ul {
+    gap: 0;
+  }
+
+  .desktop-nav {
+    display: none; /* Hide desktop nav */
+  }
+
+  .mobile-menu-button {
+    display: block; /* Show burger button */
+  }
+
+  .pricing-container {
+     grid-template-columns: 1fr; /* Single column */
+  }
+
+   .pricing-plan.featured {
+     transform: scale(1); /* Disable scaling on mobile maybe? */
+   }
+   .pricing-plan.featured:hover {
+    transform: translateY(-5px); /* Keep hover effect */
+   }
+}
+
+@media (max-width: 480px) {
+  h1 {
+     font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  .hero h2 {
+    font-size: 2rem;
+  }
+  /* Remove the old display: none for header nav */
+  /* header nav { */
+  /*   display: none; */
+  /* } */
+}
