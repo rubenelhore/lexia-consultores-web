@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../Logo.png'; // Corrected case for logo import
 import PreConsultaModal from './PreConsultaModal'; // Import the modal component
-import '../styles/Header.css'; // Assuming you have or will create this for Header specific styles
 
 // Define UserData interface here or import if defined elsewhere
 interface UserData {
