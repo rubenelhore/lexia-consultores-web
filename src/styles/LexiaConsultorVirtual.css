@@ -1,0 +1,278 @@
+.lexia-consultor-section {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 40px auto; /* Center the section */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.lexia-consultor-section h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.lexia-consultor-section p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.controversy-form h3 {
+  color: #444;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* Reusing form-group styles potentially from modal or global styles */
+/* If not defined globally, uncomment and adjust these */
+/*
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical; 
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+*/
+
+.party-input {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 10px; /* Space between elements */
+}
+
+.party-input label {
+    flex-shrink: 0; /* Prevent label from shrinking */
+    width: 60px; /* Fixed width for label */
+    margin-bottom: 0; /* Override default margin */
+}
+
+.party-input input {
+    flex-grow: 1; /* Allow input to take remaining space */
+    margin-bottom: 0; /* Override default margin */
+}
+
+
+.remove-party-button {
+  background: #f44336; /* Red background */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  width: 25px;
+  height: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex; /* Use flexbox for centering */
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  transition: background-color 0.2s ease;
+}
+
+.remove-party-button:hover {
+  background: #d32f2f; /* Darker red on hover */
+}
+
+.add-party-button {
+  background: none;
+  border: 1px dashed #007bff;
+  color: #007bff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  display: inline-block;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.add-party-button:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.lexia-consultor-section .cta-button {
+  display: block;
+  width: auto; /* Allow button to size based on content */
+  min-width: 200px; /* Minimum width */
+  margin: 30px auto 0; /* Center button horizontally */
+  padding: 12px 25px;
+}
+
+/* Styles for Argument Input Stage */
+.arguments-form h3 {
+  /* Similar styling to details form h3 */
+  color: #444;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.arguments-form p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.argument-input {
+  margin-bottom: 25px;
+}
+
+.argument-input label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #444;
+  font-size: 1.1rem;
+}
+
+.argument-input textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  font-size: 1rem;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 150px; /* Minimum height for text area */
+}
+
+.argument-input textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Styles for Summary Stage (Placeholder) */
+.summary-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.summary-section h3 {
+   color: #333;
+   margin-bottom: 15px;
+}
+
+.summary-section p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Styles for Loading Stage */
+.loading-section {
+  text-align: center;
+  padding: 50px 20px;
+  color: #555;
+}
+
+.loading-section p {
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+}
+
+/* Basic CSS Spinner */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #007bff; /* Spinner color */
+  margin: 0 auto;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Styles for Summary Result */
+.resolution-output {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  white-space: pre-wrap; /* Preserve line breaks and spaces */
+  word-wrap: break-word; /* Wrap long lines */
+  text-align: left;
+  font-family: monospace; /* Or a suitable font for code/documents */
+  line-height: 1.6;
+  max-height: 60vh; /* Limit height and add scroll if needed */
+  overflow-y: auto; /* Add scrollbar if content exceeds max height */
+}
+
+.print-button {
+    margin-top: 10px;
+}
+
+/* Styles for Error Stage */
+.error-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff5f5; /* Light red background */
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #d32f2f; /* Dark red text */
+}
+
+.error-section h3 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+}
+
+.error-message {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.retry-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.retry-button:hover {
+    background-color: #0056b3;
+} 

@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
 import logo from '../Logo.png'; // Corrected case for logo import
+import PreConsultaModal from './PreConsultaModal'; // Import the modal component
+import '../styles/Header.css'; // Assuming you have or will create this for Header specific styles
 
-const Header: React.FC = () => {
+// Define UserData interface here or import if defined elsewhere
+interface UserData {
+  nombre: string;
+  email: string;
+  telefono: string;
+}
+
+// Define props for Header
+interface HeaderProps {
+  onStartConsultation: (userData: UserData) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isPreConsultaModalOpen, setIsPreConsultaModalOpen] = useState(false); // State for modal
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -13,6 +28,19 @@ const Header: React.FC = () => {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+  };
+
+  // Functions to control the modal
+  const openPreConsultaModal = () => {
+    setIsPreConsultaModalOpen(true);
+    // Close mobile menu if open when opening the modal
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const closePreConsultaModal = () => {
+    setIsPreConsultaModalOpen(false);
   };
 
   return (
@@ -27,6 +55,7 @@ const Header: React.FC = () => {
           <li><a href="#contact">Contacto</a></li>
         </ul>
         <a href="#contact" className="cta-button">Solicita Consulta</a>
+        <button className="cta-button pre-consulta-button">Realizar Pre-Consulta</button>
       </nav>
 
       {/* --- Mobile Menu Button (Burger) --- */}
@@ -46,7 +75,15 @@ const Header: React.FC = () => {
         </ul>
         {/* Include CTA in mobile menu too */}
         <a href="#contact" className="cta-button" onClick={handleMobileLinkClick}>Solicita Consulta</a>
+        <button className="cta-button pre-consulta-button" onClick={openPreConsultaModal}>Realizar Pre-Consulta</button>
       </nav>
+
+      {/* Render the modal conditionally */}
+      <PreConsultaModal
+        isOpen={isPreConsultaModalOpen}
+        onClose={closePreConsultaModal}
+        onProceed={onStartConsultation}
+      />
 
     </header>
   );
