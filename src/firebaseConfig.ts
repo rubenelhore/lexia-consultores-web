@@ -1,32 +1,27 @@
-import firebase from 'firebase/compat/app'; // Import compat/app
-import 'firebase/compat/firestore';      // Import compat/firestore
-// import { getAnalytics } from "firebase/analytics"; // Optional: If you use Analytics
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore"; // Added Firestore import
 
-// --- NUEVA CONFIGURACIÓN HARDCODED --- (Del proyecto lexiaconsultores-5e0db)
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCB2KKiEbvfWmJ3qElknAyzJOzvK6Ca9ps",
-  authDomain: "lexiaconsultores-5e0db.firebaseapp.com",
-  projectId: "lexiaconsultores-5e0db",
-  storageBucket: "lexiaconsultores-5e0db.appspot.com", // Usamos .appspot.com aquí
-  messagingSenderId: "752434104302",
-  appId: "1:752434104302:web:2aa7d15c6e946729ea30ff",
-  measurementId: "G-B3D540K7L1" // Opcional
+  apiKey: "AIzaSyAbWAJrhq28kxIeIprycaIEOjq7yi9N-5I",
+  authDomain: "lexia-consultores-b593f.firebaseapp.com",
+  projectId: "lexia-consultores-b593f",
+  storageBucket: "lexia-consultores-b593f.appspot.com", // Corrected storageBucket domain
+  messagingSenderId: "1010531242469",
+  appId: "1:1010531242469:web:199c03a77c982113369f0c",
+  measurementId: "G-N9TYD05KR8"
 };
-// -----------------------------------
 
-console.log(">>> USANDO SDK v8 COMPAT Y NUEVA CONFIG HARDCODED");
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app); // Initialize Firestore
 
-// Initialize Firebase (estilo v8)
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app(); // if already initialized, use that one
-}
-
-// Initialize Firestore (estilo v8)
-const db = firebase.firestore(); // Obtiene la instancia de firestore
-
-// Initialize Analytics (optional)
-// const analytics = getAnalytics(app);
-
-export { db /*, analytics */ }; // Export db and analytics (if used)
+// Export Firebase services
+export { app, analytics, db };

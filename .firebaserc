@@ -1,11 +1,8 @@
 {
   "projects": {
-<<<<<<< HEAD
-    "default": "lexia-consulores"
-  }
+    "default": "lexia-consultores-b593f",
+    "lexia-consultores": "lexia-consultores-b593f"
+  },
+  "targets": {},
+  "etags": {}
 }
-=======
-    "default": "lexia-consulores" 
-  }
-} 
->>>>>>> 7007dc5d2dd58701a6f3e51144f026991369901b
