@@ -52,6 +52,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
           <li><a href="#features">Características</a></li>
           <li><a href="#how-it-works">¿Cómo Funciona?</a></li>
           <li><a href="#contact">Contacto</a></li>
+          <li><a href="https://lexiaconsultores.substack.com" target="_blank" rel="noopener noreferrer">Blog</a></li>
         </ul>
         <a href="#contact" className="cta-button">Solicita Consulta</a>
         <button className="cta-button pre-consulta-button" onClick={openPreConsultaModal}>Realizar Pre-Consulta</button>
@@ -71,6 +72,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
           <li><a href="#features" onClick={handleMobileLinkClick}>Características</a></li>
           <li><a href="#how-it-works" onClick={handleMobileLinkClick}>¿Cómo Funciona?</a></li>
           <li><a href="#contact" onClick={handleMobileLinkClick}>Contacto</a></li>
+          <li><a href="https://lexiaconsultores.substack.com" target="_blank" rel="noopener noreferrer" onClick={handleMobileLinkClick}>Blog</a></li>
         </ul>
         {/* Include CTA in mobile menu too */}
         <a href="#contact" className="cta-button" onClick={handleMobileLinkClick}>Solicita Consulta</a>
