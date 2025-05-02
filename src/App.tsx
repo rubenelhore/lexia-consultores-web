@@ -30,20 +30,25 @@ function App() {
     console.log('Starting consultation for:', userData);
     setCurrentUserData(userData);
     setCurrentView('consultation');
-    // Optionally scroll to the new section
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to the top when switching to consultation view
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Function to potentially go back to landing (if needed later)
-  // const goToLanding = () => {
-  //   setCurrentView('landing');
-  //   setCurrentUserData(null);
-  // };
+  // Function to go back to landing view
+  const goToLanding = () => {
+    setCurrentView('landing');
+    setCurrentUserData(null);
+    // Scroll to the top when going back to landing
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="App">
-      {/* Restore original Header usage */}
-      <Header onStartConsultation={startConsultation} />
+      {/* Pass both functions to Header */}
+      <Header 
+        onStartConsultation={startConsultation} 
+        onGoToLanding={goToLanding} // Pass the new function
+      />
       <main>
         {currentView === 'landing' && (
           <>

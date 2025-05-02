@@ -11,9 +11,10 @@ interface UserData {
 // Define props for Header
 interface HeaderProps {
   onStartConsultation: (userData: UserData) => void;
+  onGoToLanding: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
+const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
 
   const toggleMobileMenu = () => {
@@ -38,9 +39,29 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
     }
   };
 
+  // Function to handle logo click (calls the prop)
+  const handleLogoClick = () => {
+    onGoToLanding();
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <header>
-      <img src={logo} alt="LexIA Consultores Logo" className="header-logo" />
+      {/* Wrap logo in a clickable element */}
+      <div 
+        className="logo-container" 
+        onClick={handleLogoClick} 
+        style={{ cursor: 'pointer' }}
+        role="button"
+        aria-label="Ir a inicio"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleLogoClick(); }}
+      >
+        <img src={logo} alt="LexIA Consultores Logo" className="header-logo" />
+      </div>
 
       {/* --- Desktop Navigation --- */}
       <nav className="desktop-nav"> {/* Add class for desktop nav */}
