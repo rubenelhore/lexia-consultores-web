@@ -1,8 +1,17 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Deny all reads and writes by default.
-    // Adjust these rules when implementing authentication and data access.
+    // Allow anyone to write to preConsultas (INSECURE - for testing only)
+    match /preConsultas/{preConsultaId} {
+      allow read, write: if true; // Adjust for production!
+    }
+
+    // Allow anyone to write to consultations (INSECURE - for testing only)
+    match /consultations/{consultationId} {
+      allow read, write: if true; // Adjust for production!
+    }
+
+    // Keep default deny for other paths
     match /{document=**} {
       allow read, write: if false;
     }
