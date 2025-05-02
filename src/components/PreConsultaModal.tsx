@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/PreConsultaModal.css'; // We'll create this CSS file next
+import { db } from '../firebaseConfig'; // Import Firestore instance
+import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Import Firestore functions
 
 interface UserData {
   nombre: string;
@@ -21,13 +23,26 @@ const PreConsultaModal: React.FC<PreConsultaModalProps> = ({ isOpen, onClose, on
 
   if (!isOpen) return null;
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const userData: UserData = { nombre, email, telefono };
-    console.log('User Data:', userData); // Log data for now
-    // TODO: Add actual data saving logic (e.g., API call)
-    onProceed(userData); // Call the new prop function with user data
-    onClose(); // UNCOMMENT THIS LINE - Close the modal after proceeding
+    console.log('User Data:', userData);
+
+    try {
+      // Save to Firestore
+      const docRef = await addDoc(collection(db, "preConsultas"), {
+        ...userData, // Spread user data
+        submittedAt: Timestamp.now() // Add timestamp
+      });
+      console.log("Pre-consulta data saved with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error saving pre-consulta data: ", error);
+      // Optional: Notify user of the error, but proceed anyway
+    } finally {
+       // Proceed regardless of Firestore save status to not block UX
+      onProceed(userData);
+      onClose();
+    }
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/LexiaConsultorVirtual.css'; // We will create this CSS file
 import { getFunctions, httpsCallable } from "firebase/functions"; // Import Firebase functions
+import { db } from '../firebaseConfig'; // Import Firestore instance
+import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Import Firestore functions
 
 // Assuming UserData interface is defined elsewhere or we define it here
 interface UserData {
@@ -108,6 +110,25 @@ const LexiaConsultorVirtual: React.FC<LexiaConsultorVirtualProps> = ({ userData 
       if (data.resolution) {
         setResolutionResult(data.resolution);
         setStage('summary');
+
+        // --- Save consultation data to Firestore ---
+        try {
+          const consultationData = {
+            userData: userData, // User details from props
+            controversyDetails: controversyDetails,
+            partesInvolucradas: partesInvolucradas,
+            argumentsData: argumentsData,
+            resolution: data.resolution,
+            createdAt: Timestamp.now()
+          };
+          const docRef = await addDoc(collection(db, "consultations"), consultationData);
+          console.log("Consultation data saved with ID: ", docRef.id);
+        } catch (firestoreError) {
+          console.error("Error saving consultation data to Firestore: ", firestoreError);
+          // Log error but don't block UI or change stage
+        }
+        // --- End Firestore save ---
+
       } else {
           throw new Error("La respuesta de la función no contenía una resolución.");
       }
