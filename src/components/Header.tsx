@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../Logo.png'; // Corrected case for logo import
+import logo from '../Logo.png'; // Revert path
 import PreConsultaModal from './PreConsultaModal'; // Import the modal component
 
 // Define UserData interface here or import if defined elsewhere
@@ -54,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
           <li><a href="#contact">Contacto</a></li>
         </ul>
         <a href="#contact" className="cta-button">Solicita Consulta</a>
-        <button className="cta-button pre-consulta-button">Realizar Pre-Consulta</button>
+        <button className="cta-button pre-consulta-button" onClick={openPreConsultaModal}>Realizar Pre-Consulta</button>
       </nav>
 
       {/* --- Mobile Menu Button (Burger) --- */}

@@ -21,12 +21,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src/index.tsx",
-    "src/App.tsx",
-    "src/components/Header.tsx",
-    "src/components/PreConsultaModal.tsx",
-    "src/reportWebVitals.ts",
-    "src/react-app-env.d.ts",
-    "functions/index.ts"
+    "src"
   ]
 }

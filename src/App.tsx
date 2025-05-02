@@ -22,6 +22,9 @@ function App() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
   const [currentUserData, setCurrentUserData] = useState<UserData | null>(null);
 
+  // Remove dummy function if it exists
+  // const dummyStartConsultation = (userData: UserData) => { ... };
+
   // This function will be passed down to the modal via Header
   const startConsultation = (userData: UserData) => {
     console.log('Starting consultation for:', userData);
@@ -39,6 +42,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* Restore original Header usage */}
       <Header onStartConsultation={startConsultation} />
       <main>
         {currentView === 'landing' && (
