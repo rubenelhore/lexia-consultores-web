@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import logo from '../Logo.png'; // Revert path
-import PreConsultaModal from './PreConsultaModal'; // Import the modal component
 
 // Define UserData interface here or import if defined elsewhere
 interface UserData {
@@ -16,7 +15,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
-  const [isPreConsultaModalOpen, setIsPreConsultaModalOpen] = useState(false); // State for modal
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -29,17 +27,15 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
     }
   };
 
-  // Functions to control the modal
-  const openPreConsultaModal = () => {
-    setIsPreConsultaModalOpen(true);
-    // Close mobile menu if open when opening the modal
+  // Function to handle starting the pre-consulta directly
+  const handleStartPreConsulta = () => {
+    // Pass dummy data for now. We need to decide how to handle real user data later.
+    const dummyUserData: UserData = { nombre: '', email: '', telefono: '' };
+    onStartConsultation(dummyUserData);
+    // Close mobile menu if open
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
-  };
-
-  const closePreConsultaModal = () => {
-    setIsPreConsultaModalOpen(false);
   };
 
   return (
@@ -55,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
           <li><a href="https://lexiaconsultores.substack.com" target="_blank" rel="noopener noreferrer">Blog</a></li>
         </ul>
         <a href="#contact" className="cta-button">Solicita Consulta</a>
-        <button className="cta-button pre-consulta-button" onClick={openPreConsultaModal}>Realizar Pre-Consulta</button>
+        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Realizar Pre-Consulta</button>
       </nav>
 
       {/* --- Mobile Menu Button (Burger) --- */}
@@ -76,15 +72,8 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation }) => {
         </ul>
         {/* Include CTA in mobile menu too */}
         <a href="#contact" className="cta-button" onClick={handleMobileLinkClick}>Solicita Consulta</a>
-        <button className="cta-button pre-consulta-button" onClick={openPreConsultaModal}>Realizar Pre-Consulta</button>
+        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Realizar Pre-Consulta</button>
       </nav>
-
-      {/* Render the modal conditionally */}
-      <PreConsultaModal
-        isOpen={isPreConsultaModalOpen}
-        onClose={closePreConsultaModal}
-        onProceed={onStartConsultation}
-      />
 
     </header>
   );
