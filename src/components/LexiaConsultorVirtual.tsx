@@ -203,8 +203,28 @@ const LexiaConsultorVirtual: React.FC<LexiaConsultorVirtualProps> = ({ userData 
       {stage === 'summary' && (
         <div className="summary-section">
           <h3>Resumen y Resultado</h3>
-          <p>Los argumentos han sido enviados. Procesando la información...</p>
-          {/* TODO: Display results from Gemini API call */}
+          {/* Remove the placeholder "Procesando..." message */}
+          {/* <p>Los argumentos han sido enviados. Procesando la información...</p> */}
+          
+          {/* Display the actual result */}
+          {resolutionResult ? (
+            <pre className="resolution-output">{resolutionResult}</pre>
+          ) : (
+            <p>Generando resultado...</p> // Show a brief loading message if needed
+          )}
+
+          {/* Optionally add buttons here later, e.g., to copy, print, or start over */}
+
+          {/* Add button to navigate to Contact Section */}
+          <button 
+            className="cta-button contact-scroll-button" 
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              contactSection?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Agenda Tu Cita Hoy
+          </button>
         </div>
       )}
 

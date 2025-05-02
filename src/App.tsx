@@ -50,13 +50,16 @@ function App() {
             <HeroSection />
             <FeaturesSection />
             <HowItWorksSection />
-            <ContactSection />
           </>
         )}
 
         {currentView === 'consultation' && currentUserData && (
           <LexiaConsultorVirtual userData={currentUserData} />
         )}
+
+        {/* Always render ContactSection */} 
+        <ContactSection />
+
       </main>
       <Footer />
     </div>

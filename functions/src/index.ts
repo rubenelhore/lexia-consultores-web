@@ -1,55 +1,56 @@
 import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
+import * as admin from "firebase-admin"; // UNCOMMENT
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai"; // UNCOMMENT
 
-// Initialize Firebase Admin SDK (only once)
-admin.initializeApp();
+// KEEP Global admin.initializeApp(); COMMENTED OUT
 
-// --- IMPORTANT: Configure API Key ---
-// Run this command in your terminal IN THE PROJECT ROOT directory:
-// firebase functions:config:set gemini.key="YOUR_API_KEY"
-// Replace YOUR_API_KEY with your actual key before deploying!
-// ---
-const GEMINI_API_KEY = functions.config().gemini?.key;
+// Flag to ensure admin is initialized only once per instance
+let isAdminInitialized = false; // Linter might complain, but we need let for reassignment
 
-// Initialize the Google Generative AI client
-// We check if the key exists before creating the client
-let genAI: GoogleGenerativeAI | null = null;
-if (GEMINI_API_KEY) {
-  genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-} else {
-  console.error("FATAL ERROR: Gemini API Key not found in Firebase function configuration.");
-  console.error("Run: firebase functions:config:set gemini.key=\"TU_CLAVE_API_REAL\"");
-}
+// Define a very simple callable function for testing
+export const helloWorld = functions.https.onCall((data, context) => {
+  console.log("Executing helloWorld function!");
+  return { message: "Hello from Firebase!" };
+});
 
-// Define the expected input data structure from the frontend
+// UNCOMMENT ORIGINAL FUNCTION LOGIC
+
 interface RequestData {
     controversyDetails: string;
     argumentsData: { [partyName: string]: string };
 }
 
-// Define the HTTPS Callable Function
-// Updated function signature for newer firebase-functions versions
 export const getGeminiResolution = functions.https.onCall(
   async (request: functions.https.CallableRequest<RequestData>) => {
-    // Access data from the request object
+    console.log("--- getGeminiResolution function execution STARTED ---");
+
+    // --- Initialize Admin SDK INSIDE (if not already) ---
+    if (!isAdminInitialized) {
+      admin.initializeApp();
+      isAdminInitialized = true; // Reassign the flag
+      console.log("Firebase Admin SDK initialized.");
+    }
+    // --- End Admin SDK Initialization ---
+
+    // --- Initialize Gemini Client INSIDE the function ---
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    if (!GEMINI_API_KEY) {
+      console.error("FATAL ERROR: Gemini API Key not found in function environment variables.");
+      console.error("Set the GEMINI_API_KEY environment variable during deployment or via Secret Manager.");
+      throw new functions.https.HttpsError("failed-precondition", "La configuración de la clave API para el servicio de IA no fue encontrada.");
+    }
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    // --- End Gemini Client Initialization ---
+
     const data = request.data;
 
-    // Ensure the Gemini client was initialized (API key was present)
-    if (!genAI) {
-      console.error("Gemini client not initialized. API key might be missing in config.");
-      throw new functions.https.HttpsError("failed-precondition", "La configuración del servicio de IA está incompleta. Verifica la clave API.");
-    }
-
     // --- Data Validation ---
-    // Check if required data fields are present
     if (!data.controversyDetails || typeof data.controversyDetails !== "string" || data.controversyDetails.trim() === "") {
       throw new functions.https.HttpsError("invalid-argument", "Falta la descripción de la controversia.");
     }
     if (!data.argumentsData || typeof data.argumentsData !== "object" || Object.keys(data.argumentsData).length < 2) {
       throw new functions.https.HttpsError("invalid-argument", "Se requieren los argumentos de al menos dos partes.");
     }
-    // Optional: Further validation on argument content (e.g., non-empty strings)
     for (const party in data.argumentsData) {
       if (typeof data.argumentsData[party] !== "string" || data.argumentsData[party].trim() === "") {
         throw new functions.https.HttpsError("invalid-argument", `Los argumentos para '${party}' no pueden estar vacíos.`);
@@ -57,11 +58,7 @@ export const getGeminiResolution = functions.https.onCall(
     }
     // --- End Data Validation ---
 
-
-    // --- Construct the Prompt for Gemini ---
-    // (Using the validated and cleaned data)
-    const partyNames = Object.keys(data.argumentsData).join(", "); // Get party names for the prompt
-
+    const partyNames = Object.keys(data.argumentsData).join(", ");
     let prompt = `Eres un juez mexicano altamente experimentado y especializado en Mecanismos Alternativos de Solución de Controversias (MASC), particularmente en mediación y conciliación. Tu objetivo es analizar la siguiente controversia y proponer una resolución equitativa y fundamentada en principios legales y de justicia alternativa mexicanos.
 
 Contexto de la Controversia:
@@ -92,40 +89,16 @@ Basándote EXCLUSIVAMENTE en la información proporcionada:
 
     // --- Call the Gemini API ---
     try {
-      // Select the Gemini model
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Consider "gemini-pro" for potentially more complex cases
-
-      // Configure generation parameters
-      const generationConfig = {
-        temperature: 0.5, // Lower temperature for more deterministic legal text
-        topK: 1,
-        topP: 0.95, // Keep topP high enough for some flexibility if needed
-        maxOutputTokens: 4096, // Increase if resolutions might be very long
-      };
-
-      // Define safety settings to block harmful content
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const generationConfig = { temperature: 0.5, topK: 1, topP: 0.95, maxOutputTokens: 4096 };
       const safetySettings = [
-        { category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+        { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+        { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+        { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+        { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
       ];
-
-      // Send the prompt to Gemini
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        generationConfig,
-        safetySettings,
-      });
-
-      // Process the response
+      const result = await model.generateContent({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig, safetySettings });
       const response = result.response;
-
-      // Check for blocking first
       if (response?.promptFeedback?.blockReason) {
         console.error("Gemini request blocked:", response.promptFeedback.blockReason, response.promptFeedback.safetyRatings);
         const blockReason = response.promptFeedback.blockReason;
@@ -135,36 +108,20 @@ Basándote EXCLUSIVAMENTE en la información proporcionada:
         }
         throw new functions.https.HttpsError("permission-denied", userMessage);
       }
-
-      // Check if response structure is valid and contains text
-      if (response &&
-          response.candidates &&
-          response.candidates.length > 0 &&
-          response.candidates[0].content &&
-          response.candidates[0].content.parts &&
-          response.candidates[0].content.parts.length > 0 &&
-          response.candidates[0].content.parts[0].text
-      ) {
+      if (response?.candidates?.[0]?.content?.parts?.[0]?.text) {
         const resolutionText = response.text();
         console.log("Gemini Response successfully generated.");
         return { resolution: resolutionText };
       } else {
-        // Handle unexpected response structure or empty text
         console.error("Gemini API did not return expected text content. Full Response:", JSON.stringify(response));
         throw new functions.https.HttpsError("internal", "El servicio de IA devolvió una respuesta inesperada o vacía.");
       }
     } catch (error: any) {
       console.error("Error calling Gemini API or processing response:", error);
-      // Check if it's a known HttpsError from previous steps or a new error
       if (error.code && error.message) {
-        // Re-throw known errors
         throw error;
       }
-      // Provide a generic error message back to the client for unknown errors
-      throw new functions.https.HttpsError(
-        "internal",
-        `Error al procesar la solicitud con el servicio de IA: ${error.message || "Error desconocido"}`
-      );
+      throw new functions.https.HttpsError("internal", `Error al procesar la solicitud con el servicio de IA: ${error.message || "Error desconocido"}`);
     }
   }
 );

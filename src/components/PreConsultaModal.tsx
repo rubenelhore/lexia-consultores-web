@@ -27,7 +27,7 @@ const PreConsultaModal: React.FC<PreConsultaModalProps> = ({ isOpen, onClose, on
     console.log('User Data:', userData); // Log data for now
     // TODO: Add actual data saving logic (e.g., API call)
     onProceed(userData); // Call the new prop function with user data
-    // onClose(); // We might not want to close immediately if onProceed handles the transition
+    onClose(); // UNCOMMENT THIS LINE - Close the modal after proceeding
   };
 
   return (
