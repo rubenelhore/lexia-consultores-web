@@ -9,13 +9,13 @@ import { getFirestore } from "firebase/firestore"; // Added Firestore import
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAbWAJrhq28kxIeIprycaIEOjq7yi9N-5I",
-  authDomain: "lexia-consultores-b593f.firebaseapp.com",
-  projectId: "lexia-consultores-b593f",
-  storageBucket: "lexia-consultores-b593f.appspot.com", // Corrected storageBucket domain
-  messagingSenderId: "1010531242469",
-  appId: "1:1010531242469:web:199c03a77c982113369f0c",
-  measurementId: "G-N9TYD05KR8"
+  apiKey: "AIzaSyAP-WjklHHbOUgwmkUbL90M_2pZfSTCSj8",
+  authDomain: "lexia-consultores-9d664.firebaseapp.com",
+  projectId: "lexia-consultores-9d664",
+  storageBucket: "lexia-consultores-9d664.firebasestorage.app",
+  messagingSenderId: "113402454668",
+  appId: "1:113402454668:web:c4735ec0df4478c5f051a9",
+  measurementId: "G-7CC3JKNES7"
 };
 
 // Initialize Firebase

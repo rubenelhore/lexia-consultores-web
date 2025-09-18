@@ -72,7 +72,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) =
           <li><a href="https://lexiaconsultores.substack.com" target="_blank" rel="noopener noreferrer">Blog</a></li>
         </ul>
         <a href="#contact" className="cta-button">Solicita Consulta</a>
-        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Realizar Pre-Consulta</button>
+        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Iniciar chatbot</button>
       </nav>
 
       {/* --- Mobile Menu Button (Burger) --- */}
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) =
         </ul>
         {/* Include CTA in mobile menu too */}
         <a href="#contact" className="cta-button" onClick={handleMobileLinkClick}>Solicita Consulta</a>
-        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Realizar Pre-Consulta</button>
+        <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Iniciar chatbot</button>
       </nav>
 
     </header>
