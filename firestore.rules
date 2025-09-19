@@ -11,6 +11,13 @@ service cloud.firestore {
       allow read, write: if true; // Adjust for production!
     }
 
+    // Allow anyone to write to contactMessages
+    match /contactMessages/{messageId} {
+      allow read: if false; // Only admin should read
+      allow create: if true; // Anyone can submit a contact form
+      allow update, delete: if false; // Prevent modifications after submission
+    }
+
     // Keep default deny for other paths
     match /{document=**} {
       allow read, write: if false;

@@ -1,6 +1,10 @@
 import * as functions from "firebase-functions";
+import { defineSecret } from "firebase-functions/params";
 import * as admin from "firebase-admin"; // UNCOMMENT
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai"; // UNCOMMENT
+
+// Define the secret
+const geminiApiKey = defineSecret("GEMINI_API_KEY");
 
 // KEEP Global admin.initializeApp(); COMMENTED OUT
 
@@ -22,6 +26,7 @@ interface RequestData {
 }
 
 export const getGeminiResolution = functions.https.onCall(
+  { secrets: [geminiApiKey] },
   async (request: functions.https.CallableRequest<RequestData>) => {
     console.log("--- getGeminiResolution function execution STARTED ---");
     console.log("Received data:", JSON.stringify(request.data)); // Log received data
@@ -41,7 +46,7 @@ export const getGeminiResolution = functions.https.onCall(
     // --- End Admin SDK Initialization ---\
 
     // --- Initialize Gemini Client INSIDE the function ---
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const GEMINI_API_KEY = geminiApiKey.value();
     if (!GEMINI_API_KEY) {
       console.error("FATAL ERROR: Gemini API Key not found in function environment variables.");
       console.error("Set the GEMINI_API_KEY environment variable during deployment or via Secret Manager.");

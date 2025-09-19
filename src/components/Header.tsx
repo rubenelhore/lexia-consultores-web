@@ -16,6 +16,12 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [showModal, setShowModal] = useState(false); // State for user data modal
+  const [userData, setUserData] = useState<UserData>({
+    nombre: '',
+    email: '',
+    telefono: ''
+  });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -28,15 +34,43 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) =
     }
   };
 
-  // Function to handle starting the pre-consulta directly
+  // Function to handle starting the pre-consulta - opens modal
   const handleStartPreConsulta = () => {
-    // Pass dummy data for now. We need to decide how to handle real user data later.
-    const dummyUserData: UserData = { nombre: '', email: '', telefono: '' };
-    onStartConsultation(dummyUserData);
+    setShowModal(true);
     // Close mobile menu if open
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+  };
+
+  // Handle form submission from modal
+  const handleModalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate required fields
+    if (!userData.nombre.trim() || !userData.email.trim()) {
+      alert('Por favor complete su nombre y email');
+      return;
+    }
+
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(userData.email)) {
+      alert('Por favor ingrese un email válido');
+      return;
+    }
+
+    console.log('Header: Starting consultation with user data:', userData);
+    onStartConsultation(userData);
+    setShowModal(false);
+    // Reset form
+    setUserData({ nombre: '', email: '', telefono: '' });
+  };
+
+  // Handle input changes in modal
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData(prev => ({ ...prev, [name]: value }));
   };
 
   // Function to handle logo click (calls the prop)
@@ -95,6 +129,77 @@ const Header: React.FC<HeaderProps> = ({ onStartConsultation, onGoToLanding }) =
         <a href="#contact" className="cta-button" onClick={handleMobileLinkClick}>Solicita Consulta</a>
         <button className="cta-button pre-consulta-button" onClick={handleStartPreConsulta}>Iniciar chatbot</button>
       </nav>
+
+      {/* Modal for user data */}
+      {showModal && (
+        <>
+          <div className="modal-backdrop" onClick={() => setShowModal(false)}></div>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>Iniciar Consulta con Chatbot</h2>
+              <button
+                className="modal-close"
+                onClick={() => setShowModal(false)}
+                aria-label="Cerrar modal"
+              >
+                ×
+              </button>
+            </div>
+            <form onSubmit={handleModalSubmit}>
+              <div className="form-group">
+                <label htmlFor="nombre">Nombre completo *</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={userData.nombre}
+                  onChange={handleInputChange}
+                  placeholder="Ingrese su nombre completo"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Correo electrónico *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleInputChange}
+                  placeholder="su@email.com"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="telefono">Teléfono (opcional)</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  value={userData.telefono}
+                  onChange={handleInputChange}
+                  placeholder="555-123-4567"
+                />
+              </div>
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                >
+                  Iniciar Consulta
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}
 
     </header>
   );
